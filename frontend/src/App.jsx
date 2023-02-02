@@ -1,12 +1,9 @@
-import Home from "./pages/Home";
-
-import "./App.css";
+import React from "react";
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-      <p>coucou</p>
+    <div className="App flex">
+      <p className="text-red-500">coucou</p>
     </div>
   );
 }
