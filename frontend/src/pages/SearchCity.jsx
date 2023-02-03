@@ -15,6 +15,10 @@ function SearchCity() {
       .catch((error) => console.error(error));
   };
 
+  const showCityReviews = (city) => {
+    console.warn(city);
+  };
+
   useEffect(() => {
     getCities();
   }, []);
@@ -27,7 +31,7 @@ function SearchCity() {
         searchBarContainer="flex flex-col items-center w-full relative"
         textPlaceholder="Find a City!"
         textButton="Show Cities"
-        // methodOnClick={handleOneCategory}
+        methodOnClick={showCityReviews}
       />
     </div>
   );
