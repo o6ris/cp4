@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchBar from "@components/SearchbarTemplate";
 import apiConnection from "@services/apiConnection";
 
@@ -8,6 +9,8 @@ function SearchCity() {
   const { user } = useContext(User.UserContext);
   const [cities, setCities] = useState([]);
 
+  const navigate = useNavigate();
+
   const getCities = () => {
     apiConnection
       .get(`/cities`)
@@ -16,7 +19,7 @@ function SearchCity() {
   };
 
   const showCityReviews = (city) => {
-    console.warn(city);
+    navigate(`/OneCity/${city.id}`);
   };
 
   useEffect(() => {
