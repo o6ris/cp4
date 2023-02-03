@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import apiConnection from "@services/apiConnection";
 import InputTemplate from "@components/InputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
@@ -18,6 +19,8 @@ function Login() {
     setInfos(newUser);
   };
 
+  const navigate = useNavigate();
+
   const notify = (msg) => {
     toast(msg);
   };
@@ -31,7 +34,7 @@ function Login() {
       .then((curentUser) => {
         handleUser(curentUser.data);
         notify("Connected!");
-        // navigate("/");
+        navigate("/City-Search");
       })
       .catch((err) => {
         notify("Wrong Credentials!");
