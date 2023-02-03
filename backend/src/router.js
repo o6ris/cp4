@@ -17,5 +17,6 @@ router.get("/cityReviews/:id", reviewControllers.browse);
 router.post("/review", reviewControllers.add);
 
 router.get("/ratings/:id", ratingControllers.browse);
+router.post("/rating", ratingControllers.add);
 
 module.exports = router;

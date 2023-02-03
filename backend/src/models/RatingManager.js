@@ -11,6 +11,13 @@ class RatingManager extends AbstractManager {
       [id]
     );
   }
+
+  insert(rating) {
+    return this.connection.query(
+      `insert into ${this.table} (id_user, id_review, isAgree) values (?,?,?)`,
+      [rating.id_user, rating.id_review, rating.isAgree]
+    );
+  }
 }
 
 module.exports = RatingManager;
