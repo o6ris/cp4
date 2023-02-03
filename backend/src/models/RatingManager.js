@@ -5,10 +5,10 @@ class RatingManager extends AbstractManager {
     super({ table: "rating" });
   }
 
-  findAllByReview(id) {
+  findWhoAgreesByReview(idReview, isAgree) {
     return this.connection.query(
-      `select * from  ${this.table} where id_review = ?`,
-      [id]
+      `select count(*) as disagree from  ${this.table} where id_review = ? and isAgree = ?`,
+      [idReview, isAgree]
     );
   }
 
@@ -30,6 +30,13 @@ class RatingManager extends AbstractManager {
     return this.connection.query(
       `update ${this.table} set isAgree = ? where id_review = ? and id_user = ?`,
       [rating.isAgree, idReview, idUser]
+    );
+  }
+
+  delete(idReview, idUser) {
+    return this.connection.query(
+      `delete from ${this.table} where id_review = ? and id_user = ?`,
+      [idReview, idUser]
     );
   }
 }

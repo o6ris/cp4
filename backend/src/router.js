@@ -19,8 +19,9 @@ router.get("/cities/:id", cityControllers.read);
 router.get("/cityReviews/:id", reviewControllers.browse);
 router.post("/review", reviewControllers.add);
 
-router.get("/allRatings/:id", ratingControllers.browse);
+router.get("/rating/:id", ratingControllers.browse);
 router.post("/rating", ratingControllers.add);
 router.put("/rating/:id", ratingControllers.edit);
+router.delete("/rating/:id", ratingControllers.destroy);
 
 module.exports = router;
