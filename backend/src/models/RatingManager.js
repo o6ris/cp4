@@ -25,6 +25,13 @@ class RatingManager extends AbstractManager {
       [idUser, rating.id_review, rating.isAgree]
     );
   }
+
+  update(rating, idReview, idUser) {
+    return this.connection.query(
+      `update ${this.table} set isAgree = ? where id_review = ? and id_user = ?`,
+      [rating.isAgree, idReview, idUser]
+    );
+  }
 }
 
 module.exports = RatingManager;

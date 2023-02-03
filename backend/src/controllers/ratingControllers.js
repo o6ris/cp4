@@ -37,7 +37,24 @@ const add = (req, res) => {
     });
 };
 
+const edit = (req, res) => {
+  models.rating
+    .update(req.body, req.params.id, req.auth.id)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   browse,
   add,
+  edit,
 };
