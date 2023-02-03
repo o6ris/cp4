@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import apiConnection from "@services/apiConnection";
 import InputTemplate from "@components/InputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 
@@ -7,11 +8,28 @@ function Login() {
     email: "",
     password: "",
   });
-
   const handleInputOnChange = (place, value) => {
     const newUser = { ...infos };
     newUser[place] = value;
     setInfos(newUser);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    apiConnection
+      .post(`/login`, {
+        ...infos,
+      })
+      .then((curentUser) => {
+        console.warn(curentUser.data);
+        // handleUser(curentUser.data);
+        // notify("Connected!");
+        // navigate("/");
+      })
+      .catch((err) => {
+        // notify("Wrong Credentials!");
+        console.error(err);
+      });
   };
 
   return (
@@ -26,15 +44,15 @@ function Login() {
       <InputTemplate
         textPlaceholder="password"
         customWidth="inputStyle"
-        inputType="text"
+        inputType="password"
         methodOnChange={handleInputOnChange}
-        name="email"
+        name="password"
       />
       <ButtonTemplate
-        buttonType="button"
+        buttonType="submit"
         buttonText="Log In"
         buttonStyle="buttonStyle"
-        // methodOnClick={validateLogin}
+        methodOnClick={handleLogin}
       />
     </form>
   );
