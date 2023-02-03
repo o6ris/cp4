@@ -16,9 +16,9 @@ function App() {
     <Router>
       <div>
         <Routes>
+          <Route path="/" element={<Navigate replace to="/Login" />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/FindCity" element={<SearchCity />} />
-          <Route path="*" element={<Navigate replace to="/Login" />} />
         </Routes>
       </div>
     </Router>
