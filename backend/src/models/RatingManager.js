@@ -5,7 +5,7 @@ class RatingManager extends AbstractManager {
     super({ table: "rating" });
   }
 
-  findAll(id) {
+  findAllByReview(id) {
     return this.connection.query(
       `select * from  ${this.table} where id_review = ?`,
       [id]

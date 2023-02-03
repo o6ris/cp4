@@ -2,7 +2,7 @@ const models = require("../models");
 
 const browse = (req, res) => {
   models.rating
-    .findAll(req.params.id)
+    .findAllByReview(req.params.id)
     .then(([rows]) => {
       res.status(200).send(rows);
     })
