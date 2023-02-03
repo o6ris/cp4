@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import apiConnection from "@services/apiConnection";
 import InputTemplate from "@components/InputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 
+import User from "../contexts/UserContext";
+
 function Login() {
+  const { handleUser } = useContext(User.UserContext);
   const [infos, setInfos] = useState({
     email: "",
     password: "",
@@ -21,8 +24,7 @@ function Login() {
         ...infos,
       })
       .then((curentUser) => {
-        console.warn(curentUser.data);
-        // handleUser(curentUser.data);
+        handleUser(curentUser.data);
         // notify("Connected!");
         // navigate("/");
       })
