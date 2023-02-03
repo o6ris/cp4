@@ -29,9 +29,21 @@ const add = (req, res) => {
   const review = req.body;
   review.dateReview = datePost();
   models.reviews
-    .insert(req.body, req.auth.id)
-    .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+    .findOneByUser(review.id_city, req.auth.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        models.reviews
+          .insert(review, req.auth.id)
+          .then(([result]) => {
+            res.location(`/items/${result.insertId}`).sendStatus(201);
+          })
+          .catch((err) => {
+            console.error(err);
+            res.sendStatus(500);
+          });
+      } else {
+        res.send("You have already posted a review!");
+      }
     })
     .catch((err) => {
       console.error(err);

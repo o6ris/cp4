@@ -16,6 +16,13 @@ class ReviewManager extends AbstractManager {
     );
   }
 
+  findOneByUser(idCity, idUser) {
+    return this.connection.query(
+      `select * from  ${this.table} where id_city = ? and id_user = ?`,
+      [idCity, idUser]
+    );
+  }
+
   insert(review, idUser) {
     return this.connection.query(
       `insert into ${this.table} (id_city, id_user, date_post, arrival_date, return_date, security, activities, cost_of_living, environement, public_transportation, weather, shops, nightlife, comment) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
