@@ -12,6 +12,13 @@ class RatingManager extends AbstractManager {
     );
   }
 
+  findOneByReview(idReview, idUser) {
+    return this.connection.query(
+      `select * from  ${this.table} where id_review = ? and id_user = ?`,
+      [idReview, idUser]
+    );
+  }
+
   insert(idUser, rating) {
     return this.connection.query(
       `insert into ${this.table} (id_user, id_review, isAgree) values (?,?,?)`,
