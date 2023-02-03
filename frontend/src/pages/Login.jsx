@@ -34,7 +34,7 @@ function Login() {
       .then((curentUser) => {
         handleUser(curentUser.data);
         notify("Connected!");
-        navigate("/City-Search");
+        navigate("/FindCity");
       })
       .catch((err) => {
         notify("Wrong Credentials!");
