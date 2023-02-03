@@ -12,5 +12,6 @@ router.post("/login", validators.checkUser, userControllers.validateUser);
 router.get("/cities", cityControllers.browse);
 
 router.get("/cityReviews/:id", reviewControllers.browse);
+router.post("/review", reviewControllers.add);
 
 module.exports = router;
