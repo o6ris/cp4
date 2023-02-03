@@ -15,7 +15,7 @@ const browse = (req, res) => {
 const add = (req, res) => {
   const rating = req.body;
   models.rating
-    .insert(rating)
+    .insert(req.auth.id, rating)
     .then(([result]) => {
       res.location(`/items/${result.insertId}`).sendStatus(201);
     })

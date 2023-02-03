@@ -7,8 +7,11 @@ const cityControllers = require("./controllers/cityControllers");
 const reviewControllers = require("./controllers/reviewControllers");
 const ratingControllers = require("./controllers/ratingControllers");
 const validators = require("./services/validators");
+const checkAuth = require("./middleware/checkAuth");
 
 router.post("/login", validators.checkUser, userControllers.validateUser);
+
+router.use(checkAuth);
 
 router.get("/cities", cityControllers.browse);
 router.get("/cities/:id", cityControllers.read);
