@@ -5,6 +5,13 @@ class RatingManager extends AbstractManager {
     super({ table: "rating" });
   }
 
+  findAllByReview(id) {
+    return this.connection.query(
+      `select * from  ${this.table} where id_review = ?`,
+      [id]
+    );
+  }
+
   findWhoAgreesByReview(idReview, isAgree) {
     return this.connection.query(
       `select count(*) as disagree from  ${this.table} where id_review = ? and isAgree = ?`,
