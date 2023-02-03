@@ -26,7 +26,7 @@ function SearchCity() {
     getCities();
   }, []);
   return (
-    <div className="w-full flex flex-col gap-5 items-center mt-20">
+    <div className="pageContainer">
       <p>Hello {user.alias}!</p>
       <SearchBar
         data={cities}
