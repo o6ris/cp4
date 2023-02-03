@@ -16,12 +16,12 @@ class ReviewManager extends AbstractManager {
     );
   }
 
-  insert(review) {
+  insert(review, idUser) {
     return this.connection.query(
       `insert into ${this.table} (id_city, id_user, date_post, arrival_date, return_date, security, activities, cost_of_living, environement, public_transportation, weather, shops, nightlife, comment) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
       [
         review.id_city,
-        review.id_user,
+        idUser,
         review.dateReview,
         review.arrival_date,
         review.return_date,

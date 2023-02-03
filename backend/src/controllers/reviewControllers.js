@@ -29,7 +29,7 @@ const add = (req, res) => {
   const review = req.body;
   review.dateReview = datePost();
   models.reviews
-    .insert(req.body)
+    .insert(req.body, req.auth.id)
     .then(([result]) => {
       res.location(`/items/${result.insertId}`).sendStatus(201);
     })
