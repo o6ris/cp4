@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import Login from "@pages/Login";
 import SearchCity from "@pages/SearchCity";
 
@@ -13,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/Login" element={<Login />} />
           <Route path="/FindCity" element={<SearchCity />} />
+          <Route path="*" element={<Navigate replace to="/Login" />} />
         </Routes>
       </div>
     </Router>
