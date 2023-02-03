@@ -15,8 +15,6 @@ function SearchBar({
   searchBarContainer,
   customWidth,
   methodOnClick,
-  reset,
-  preSelectedValue,
 }) {
   const ref = useRef();
   const [displayData, setDisplayData] = useState(false);
@@ -39,21 +37,6 @@ function SearchBar({
     };
   }, [displayData]);
 
-  useEffect(() => {
-    if (preSelectedValue) {
-      const selectedObj = data.find(
-        (el) => el.id === parseInt(preSelectedValue, 10)
-      );
-      setSearchData(selectedObj.Name);
-    } else {
-      setSearchData("");
-    }
-  }, [preSelectedValue]);
-
-  useEffect(() => {
-    setSearchData("");
-  }, [reset]);
-
   const handleDisplayData = () => {
     if (searchData.length > 0) {
       setSearchData("");
@@ -63,7 +46,7 @@ function SearchBar({
 
   // eslint-disable-next-line no-shadow
   const updateSearchBar = (data) => {
-    setSearchData(data.Name);
+    setSearchData(data.name);
     methodOnClick(data);
     setDisplayData(false);
   };
@@ -76,7 +59,7 @@ function SearchBar({
           className="focus:outline-none"
           type="text"
           placeholder={textPlaceholder}
-          value={searchData}
+          value={searchData.toLowerCase()}
         />
         <button
           onClick={handleDisplayData}
@@ -95,7 +78,7 @@ function SearchBar({
           <ul className="flex flex-col">
             {data
               .filter((myData) =>
-                myData.Name.toLowerCase().includes(searchData)
+                myData.name.toLowerCase().startsWith(searchData)
               )
               .map((myData) => (
                 <button
@@ -104,7 +87,7 @@ function SearchBar({
                   key={myData.id}
                   className="text-white text-base self-start py-3 pl-5 hover:text-secondary hover:bg-white hover:bg-opacity-5 w-full flex"
                 >
-                  {myData.Name}
+                  {myData.name}
                 </button>
               ))}
           </ul>
