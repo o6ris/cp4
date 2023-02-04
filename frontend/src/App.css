@@ -15,6 +15,12 @@
   .pageContainer {
     @apply w-full flex flex-col gap-5 items-center mt-20;
   }
+  .iconCriteria {
+    @apply text-4xl text-red-300;
+  }
+  .countainerCriteria {
+    @apply flex flex-col items-center justify-center gap-3 bg-gray-200 w-40 h-40 rounded-lg;
+  }
 }
 
 body {

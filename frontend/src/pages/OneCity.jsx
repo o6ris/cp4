@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import {
+  FaCloudSun,
+  FaShieldAlt,
+  FaCoins,
+  FaTree,
+  FaTrain,
+  FaShoppingBag,
+  FaSnowboarding,
+  FaGlassMartiniAlt,
+} from "react-icons/fa";
 import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "@components/ButtonTemplate";
 
@@ -7,6 +17,8 @@ function OneCity() {
   const { id } = useParams();
   const [reviewsCity, setReviewsCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
+  // console.log(reviewsCity);
+  // console.log(avgScoresCity);
   const getReviewsByCity = () => {
     apiConnection
       .get(`/cityReviews/${id}`)
@@ -33,6 +45,7 @@ function OneCity() {
     <div className="w-full flex flex-col items-center">
       {reviewsCity && avgScoresCity && (
         <>
+          {/* HEADER */}
           <div
             className="bg-center bg-cover bg-no-repeat w-full h-72 relative"
             style={{ backgroundImage: `url(${reviewsCity[0]?.cityPicture})` }}
@@ -51,9 +64,52 @@ function OneCity() {
               buttonStyle="buttonStyle"
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>Bonjour</div>
+          {/* NOTES CRITERES */}
+          <div className="grid grid-cols-2 gap-4 pt-6">
+            <div className="countainerCriteria">
+              <FaCloudSun className="iconCriteria" />
+              <h3 className="text-sm">Whether</h3>
+              <h3 className="text-2xl">{avgScoresCity.avgWeather}</h3>
+            </div>
+            <div className="countainerCriteria">
+              <FaShieldAlt className="iconCriteria" />
+              <h3 className="text-sm">Security</h3>
+              <h3 className="text-2xl">{avgScoresCity.avgSecurity}</h3>
+            </div>
+            <div className="countainerCriteria">
+              <FaCoins className="iconCriteria" />
+              <h3 className="text-sm">Cost of Living</h3>
+              <h3 className="text-2xl">{avgScoresCity.avgCost_of_living}</h3>
+            </div>
+            <div className="countainerCriteria">
+              <FaTree className="iconCriteria" />
+              <h3 className="text-sm">Environement</h3>
+              <h3 className="text-2xl">{avgScoresCity.avgEnvironement}</h3>
+            </div>
+            <div className="countainerCriteria">
+              <FaTrain className="iconCriteria" />
+              <h3 className="text-sm">Public Transportation</h3>
+              <h3 className="text-2xl">
+                {avgScoresCity.avgPublic_transportation}
+              </h3>
+            </div>
+            <div className="countainerCriteria">
+              <FaShoppingBag className="iconCriteria" />
+              <h3 className="text-sm">Shops Facilities</h3>
+              <h3 className="text-2xl">{avgScoresCity.avgShops}</h3>
+            </div>
+            <div className="countainerCriteria">
+              <FaSnowboarding className="iconCriteria" />
+              <h3 className="text-sm">Activities</h3>
+              <h3 className="text-2xl">{avgScoresCity.avgActivities}</h3>
+            </div>
+            <div className="countainerCriteria">
+              <FaGlassMartiniAlt className="iconCriteria" />
+              <h3 className="text-sm">Nightlife</h3>
+              <h3 className="text-2xl">{avgScoresCity.avgNightlife}</h3>
+            </div>
           </div>
+          {/* LES REVIEWS */}
         </>
       )}
     </div>
