@@ -8,6 +8,25 @@ function PostReview() {
   const { id } = useParams();
   const [city, setCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
+  const [review, setReview] = useState({
+    arrival_date: "",
+    return_date: "",
+    weather: 0,
+    security: 0,
+    cost_of_living: 0,
+    environement: 0,
+    public_transportation: 0,
+    shops: 0,
+    activities: 0,
+    nightlife: 0,
+    comment: "",
+  });
+
+  const handleInputOnChange = (place, value) => {
+    const newreview = { ...review };
+    newreview[place] = value;
+    setReview(newreview);
+  };
 
   const getCity = (idCity) => {
     apiConnection
@@ -49,6 +68,27 @@ function PostReview() {
               {city.name} awaits your review!
             </h1>
           </div>
+          {/* FORMULAIRE */}
+          <form className="flex flex-col items-center justify-center w-full gap-5 py-6">
+            <div className="flex flex-col items-center gap-1 w-full">
+              <p className="w-9/12 ml-5">Arrival Date</p>
+              <InputTemplate
+                customWidth="inputStyle"
+                inputType="date"
+                methodOnChange={handleInputOnChange}
+                name="arrival_date"
+              />
+            </div>
+            <div className="flex flex-col items-center gap-1 w-full">
+              <p className="w-9/12 ml-5">Departure Date</p>
+              <InputTemplate
+                customWidth="inputStyle"
+                inputType="date"
+                methodOnChange={handleInputOnChange}
+                name="return_date"
+              />
+            </div>
+          </form>
         </>
       )}
     </div>

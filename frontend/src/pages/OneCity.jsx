@@ -21,7 +21,6 @@ function OneCity() {
   const { user } = useContext(User.UserContext);
   const [reviewsCity, setReviewsCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
-  console.log(reviewsCity)
 
   const navigate = useNavigate();
 
