@@ -4,30 +4,41 @@ import { RiHeartFill, RiHeartLine } from "react-icons/ri";
 import apiConnection from "@services/apiConnection";
 
 function ButtonAgreeTemplate({ idReview, user }) {
-  const [agrees, setAgrees] = useState();
+  const [agreesNbr, setAgreesNbr] = useState();
   const [isAgree, setIsAgree] = useState(false);
+  // console.log(agreesNbr)
 
   const getWhoAgrees = (id) => {
     apiConnection
       .get(`/ratingNbr/${id}?isAgree=1`)
       .then((agree) => {
-        setAgrees(agree.data.isAgree);
+        setAgreesNbr(agree.data.isAgree);
       })
       .catch((err) => console.error(err));
   };
 
-  const iAgree = () => {
-    apiConnection
-      .post(`/rating`, {
-        id_user: user.id,
-        id_review: idReview,
-        isAgree: 1,
-      })
-      .then(() => {
-        setIsAgree(true);
-        getWhoAgrees();
-      })
-      .catch((error) => console.error(error));
+  const handleAgreed = () => {
+    if (!isAgree) {
+      apiConnection
+        .post(`/rating`, {
+          id_user: user.id,
+          id_review: idReview,
+          isAgree: 1,
+        })
+        .then(() => {
+          setIsAgree(true);
+          getWhoAgrees();
+        })
+        .catch((error) => console.error(error));
+    } else {
+      apiConnection
+        .delete(`/rating/${idReview}`)
+        .then(() => {
+          setIsAgree(false);
+          getWhoAgrees();
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   const checkIfAgree = (id) => {
@@ -45,7 +56,7 @@ function ButtonAgreeTemplate({ idReview, user }) {
 
   useEffect(() => {
     getWhoAgrees(idReview);
-  }, [agrees]);
+  }, [agreesNbr]);
 
   useEffect(() => {
     checkIfAgree(idReview);
@@ -54,15 +65,15 @@ function ButtonAgreeTemplate({ idReview, user }) {
   return (
     <div className="flex items-center gap-2">
       {!isAgree ? (
-        <button type="button" onClick={iAgree}>
+        <button type="button" onClick={handleAgreed}>
           <RiHeartLine className="text-xl text-gray-400" />
         </button>
       ) : (
-        <button type="button" onClick={iAgree}>
+        <button type="button" onClick={handleAgreed}>
           <RiHeartFill className="text-xl text-gray-400" />
         </button>
       )}
-      <p>{agrees}</p>
+      <p>{agreesNbr}</p>
     </div>
   );
 }

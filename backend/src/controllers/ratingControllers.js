@@ -46,7 +46,6 @@ const add = (req, res) => {
           .addReview(req.auth.id, rating)
           .then(([result]) => {
             res.location(`/items/${result.insertId}`).sendStatus(201);
-            // res.json(result);
           })
           .catch((err) => {
             console.error(err);
