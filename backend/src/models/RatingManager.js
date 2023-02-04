@@ -14,26 +14,26 @@ class RatingManager extends AbstractManager {
 
   findWhoAgreesByReview(idReview, isAgree) {
     return this.connection.query(
-      `select count(*) as disagree from  ${this.table} where id_review = ? and isAgree = ?`,
+      `select count(*) as isAgree from  ${this.table} where id_review = ? and isAgree = ?`,
       [idReview, isAgree]
     );
   }
 
-  findOneByReview(idReview, idUser) {
+  findOneByReview(idReview, idUser, isAgree) {
     return this.connection.query(
-      `select * from  ${this.table} where id_review = ? and id_user = ?`,
-      [idReview, idUser]
+      `select * from  ${this.table} where id_review = ? and id_user = ? and isAgree = ?`,
+      [idReview, idUser, isAgree]
     );
   }
 
-  insert(idUser, rating) {
+  addReview(idUser, rating) {
     return this.connection.query(
       `insert into ${this.table} (id_user, id_review, isAgree) values (?,?,?)`,
       [idUser, rating.id_review, rating.isAgree]
     );
   }
 
-  update(rating, idReview, idUser) {
+  editReview(rating, idReview, idUser) {
     return this.connection.query(
       `update ${this.table} set isAgree = ? where id_review = ? and id_user = ?`,
       [rating.isAgree, idReview, idUser]

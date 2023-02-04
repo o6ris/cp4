@@ -3,12 +3,26 @@
 @tailwind utilities;
 
 @layer components {
+  /* style input */
   .inputStyle {
     @apply border-solid border-primary border-2 rounded-md p-3 w-9/12 lg:w-1/2;
   }
   /* style des boutons */
   .buttonStyle {
     @apply bg-primary text-white text-base rounded-md p-2 hover:bg-secondary hover:text-primary;
+  }
+  /* style div mère d'un page */
+  .pageContainer {
+    @apply w-full flex flex-col gap-5 items-center mt-20;
+  }
+  .iconColor {
+    @apply text-red-300;
+  }
+  .iconInCountainer {
+    @apply text-4xl iconColor;
+  }
+  .countainerCriteria {
+    @apply flex flex-col items-center justify-center gap-3 bg-gray-200 w-40 h-40 rounded-lg;
   }
 }
 

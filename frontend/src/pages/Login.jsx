@@ -56,7 +56,7 @@ function Login() {
         pauseOnHover
         theme="dark"
       />
-      <form className="w-full flex flex-col gap-5 items-center mt-20">
+      <form className="pageContainer">
         <InputTemplate
           textPlaceholder="email"
           customWidth="inputStyle"
