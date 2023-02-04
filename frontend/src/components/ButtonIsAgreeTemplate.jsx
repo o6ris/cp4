@@ -8,7 +8,7 @@ import {
 } from "react-icons/ri";
 import apiConnection from "@services/apiConnection";
 
-function ButtonAgreeTemplate({ idReview, user }) {
+function ButtonIsAgreeTemplate({ idReview, user }) {
   const [agreesNbr, setAgreesNbr] = useState();
   const [disagreesNbr, setDisagreesNbr] = useState();
   const [isAgree, setIsAgree] = useState(false);
@@ -187,4 +187,4 @@ function ButtonAgreeTemplate({ idReview, user }) {
   );
 }
 
-export default ButtonAgreeTemplate;
+export default ButtonIsAgreeTemplate;

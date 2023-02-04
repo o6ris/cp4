@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "@components/ButtonTemplate";
-import ButtonAgreeTemplate from "@components/ButtonAgreeTemplate";
+import ButtonIsAgreeTemplate from "@components/ButtonIsAgreeTemplate";
 
 import User from "../contexts/UserContext";
 
@@ -169,7 +169,10 @@ function OneCity() {
                     <div className="flex items-center justify-between">
                       {/* isAGREE ? */}
                       <div className="flex items-center gap-7">
-                        <ButtonAgreeTemplate idReview={review.id} user={user} />
+                        <ButtonIsAgreeTemplate
+                          idReview={review.id}
+                          user={user}
+                        />
                       </div>
                       {/* DATE POST */}
                       <p className="text-xs">{review.date_post}</p>
