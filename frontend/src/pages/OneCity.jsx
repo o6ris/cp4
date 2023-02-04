@@ -65,7 +65,7 @@ function OneCity() {
     getWhoDisagrees(2);
   }, []);
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center pb-10">
       {reviewsCity && avgScoresCity && (
         <>
           {/* HEADER */}
@@ -88,51 +88,106 @@ function OneCity() {
             />
           </div>
           {/* NOTES CRITERES */}
-          <div className="grid grid-cols-2 gap-4 pt-6">
+          <div className="grid grid-cols-2 gap-4 py-6">
             <div className="countainerCriteria">
-              <FaCloudSun className="iconCriteria" />
+              <FaCloudSun className="iconInCountainer" />
               <h3 className="text-sm">Whether</h3>
               <h3 className="text-2xl">{avgScoresCity.avgWeather}</h3>
             </div>
             <div className="countainerCriteria">
-              <FaShieldAlt className="iconCriteria" />
+              <FaShieldAlt className="iconInCountainer" />
               <h3 className="text-sm">Security</h3>
               <h3 className="text-2xl">{avgScoresCity.avgSecurity}</h3>
             </div>
             <div className="countainerCriteria">
-              <FaCoins className="iconCriteria" />
+              <FaCoins className="iconInCountainer" />
               <h3 className="text-sm">Cost of Living</h3>
               <h3 className="text-2xl">{avgScoresCity.avgCost_of_living}</h3>
             </div>
             <div className="countainerCriteria">
-              <FaTree className="iconCriteria" />
+              <FaTree className="iconInCountainer" />
               <h3 className="text-sm">Environement</h3>
               <h3 className="text-2xl">{avgScoresCity.avgEnvironement}</h3>
             </div>
             <div className="countainerCriteria">
-              <FaTrain className="iconCriteria" />
+              <FaTrain className="iconInCountainer" />
               <h3 className="text-sm">Public Transportation</h3>
               <h3 className="text-2xl">
                 {avgScoresCity.avgPublic_transportation}
               </h3>
             </div>
             <div className="countainerCriteria">
-              <FaShoppingBag className="iconCriteria" />
+              <FaShoppingBag className="iconInCountainer" />
               <h3 className="text-sm">Shops Facilities</h3>
               <h3 className="text-2xl">{avgScoresCity.avgShops}</h3>
             </div>
             <div className="countainerCriteria">
-              <FaSnowboarding className="iconCriteria" />
+              <FaSnowboarding className="iconInCountainer" />
               <h3 className="text-sm">Activities</h3>
               <h3 className="text-2xl">{avgScoresCity.avgActivities}</h3>
             </div>
             <div className="countainerCriteria">
-              <FaGlassMartiniAlt className="iconCriteria" />
+              <FaGlassMartiniAlt className="iconInCountainer" />
               <h3 className="text-sm">Nightlife</h3>
               <h3 className="text-2xl">{avgScoresCity.avgNightlife}</h3>
             </div>
           </div>
           {/* LES REVIEWS */}
+          <div>
+            <div className="flex flex-col items-center gap-5 px-5">
+              <h2 className="text-xl">All the Reviews</h2>
+              {reviewsCity.map((review) => {
+                return (
+                  <div className="flex flex-col gap-3 bg-gray-200 p-3 rounded-lg">
+                    <div>
+                      <h3 className="text-lg">
+                        {review.userAlias} gave the score of {review.avgScore}
+                      </h3>
+                      <p className="text-sm">
+                        Trip date : {review.arrival_date} - {review.return_date}
+                      </p>
+                    </div>
+                    <ul className="grid grid-cols-6 gap-x-4 wrap">
+                      <li className="flex items-center gap-2">
+                        <FaCloudSun className="iconColor" /> {review.weather}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <FaShieldAlt className="iconColor" /> {review.security}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <FaCoins className="iconColor" />
+                        {review.cost_of_living}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <FaTree className="iconColor" /> {review.environement}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <FaTrain className="iconColor" />
+                        {review.public_transportation}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <FaShoppingBag className="iconColor" />
+                        {review.shops}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <FaSnowboarding className="iconColor" />
+                        {review.activities}
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <FaGlassMartiniAlt className="iconColor" />
+                        {review.nightlife}
+                      </li>
+                    </ul>
+                    <div>
+                      <p>{review.userAlias} review :</p>
+                      <p>{review.comment}</p>
+                    </div>
+                    <p className="self-end text-xs">{review.date_post}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </>
       )}
     </div>
