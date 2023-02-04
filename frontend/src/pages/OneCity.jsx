@@ -10,6 +10,12 @@ import {
   FaSnowboarding,
   FaGlassMartiniAlt,
 } from "react-icons/fa";
+import {
+  // RiDislikeFill,
+  RiDislikeLine,
+  // RiHeartFill,
+  RiHeartLine,
+} from "react-icons/ri";
 import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "@components/ButtonTemplate";
 
@@ -182,7 +188,19 @@ function OneCity() {
                       <p>{review.userAlias} review :</p>
                       <p>{review.comment}</p>
                     </div>
-                    <p className="self-end text-xs">{review.date_post}</p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-7">
+                        <div className="flex items-center gap-2">
+                          <RiHeartLine className="text-xl text-gray-400" />
+                          <p>7</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <RiDislikeLine className="text-xl text-gray-400" />
+                          <p>8</p>
+                        </div>
+                      </div>
+                      <p className="text-xs">{review.date_post}</p>
+                    </div>
                   </div>
                 );
               })}
