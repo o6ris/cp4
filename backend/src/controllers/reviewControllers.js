@@ -29,7 +29,7 @@ const browseAvgScore = (req, res) => {
   models.reviews
     .getAvgScores(req.params.id)
     .then(([rows]) => {
-      res.status(200).send(rows);
+      res.status(200).send(rows[0]);
     })
     .catch((err) => {
       console.error(err);
