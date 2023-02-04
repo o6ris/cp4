@@ -12,6 +12,18 @@ const displayAll = (req, res) => {
     });
 };
 
+const read = (req, res) => {
+  models.rating
+    .findOneByReview(req.params.id, req.auth.id)
+    .then(([rows]) => {
+      res.status(200).send(rows[0]);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const browse = (req, res) => {
   models.rating
     .findWhoAgreesByReview(req.params.id, req.query.isAgree)
@@ -31,9 +43,10 @@ const add = (req, res) => {
     .then(([rows]) => {
       if (rows[0] == null) {
         models.rating
-          .insert(req.auth.id, rating)
+          .addReview(req.auth.id, rating)
           .then(([result]) => {
             res.location(`/items/${result.insertId}`).sendStatus(201);
+            // res.json(result);
           })
           .catch((err) => {
             console.error(err);
@@ -51,7 +64,7 @@ const add = (req, res) => {
 
 const edit = (req, res) => {
   models.rating
-    .update(req.body, req.params.id, req.auth.id)
+    .editReview(req.body, req.params.id, req.auth.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -87,4 +100,5 @@ module.exports = {
   edit,
   destroy,
   displayAll,
+  read,
 };

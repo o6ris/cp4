@@ -26,14 +26,14 @@ class RatingManager extends AbstractManager {
     );
   }
 
-  insert(idUser, rating) {
+  addReview(idUser, rating) {
     return this.connection.query(
       `insert into ${this.table} (id_user, id_review, isAgree) values (?,?,?)`,
       [idUser, rating.id_review, rating.isAgree]
     );
   }
 
-  update(rating, idReview, idUser) {
+  editReview(rating, idReview, idUser) {
     return this.connection.query(
       `update ${this.table} set isAgree = ? where id_review = ? and id_user = ?`,
       [rating.isAgree, idReview, idUser]
