@@ -14,7 +14,7 @@ const displayAll = (req, res) => {
 
 const read = (req, res) => {
   models.rating
-    .findOneByReview(req.params.id, req.auth.id)
+    .findOneByReview(req.params.id, req.auth.id, req.query.isAgree)
     .then(([rows]) => {
       res.status(200).send(rows[0]);
     })

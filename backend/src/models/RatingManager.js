@@ -19,10 +19,10 @@ class RatingManager extends AbstractManager {
     );
   }
 
-  findOneByReview(idReview, idUser) {
+  findOneByReview(idReview, idUser, isAgree) {
     return this.connection.query(
-      `select * from  ${this.table} where id_review = ? and id_user = ?`,
-      [idReview, idUser]
+      `select * from  ${this.table} where id_review = ? and id_user = ? and isAgree = ?`,
+      [idReview, idUser, isAgree]
     );
   }
 
