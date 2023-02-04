@@ -11,7 +11,7 @@ function ButtonDisagreeTemplate({ idReview }) {
 
   const getWhoDisagrees = (id) => {
     apiConnection
-      .get(`/rating/${id}?isAgree=0`)
+      .get(`/ratingNbr/${id}?isAgree=0`)
       .then((disagree) => {
         setDisagrees(disagree.data);
       })

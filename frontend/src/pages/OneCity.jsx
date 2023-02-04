@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import {
   FaCloudSun,
@@ -15,8 +15,11 @@ import ButtonTemplate from "@components/ButtonTemplate";
 import ButtonAgreeTemplate from "@components/ButtonAgreeTemplate";
 import ButtonDisagreeTemplate from "@components/ButtonDisagreeTemplate";
 
+import User from "../contexts/UserContext";
+
 function OneCity() {
   const { id } = useParams();
+  const { user } = useContext(User.UserContext);
   const [reviewsCity, setReviewsCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
   // console.log(reviewsCity);
@@ -167,8 +170,11 @@ function OneCity() {
                     <div className="flex items-center justify-between">
                       {/* isAGREE ? */}
                       <div className="flex items-center gap-7">
-                        <ButtonAgreeTemplate idReview={review.id} />
-                        <ButtonDisagreeTemplate idReview={review.id} />
+                        <ButtonAgreeTemplate idReview={review.id} user={user} />
+                        <ButtonDisagreeTemplate
+                          idReview={review.id}
+                          user={user}
+                        />
                       </div>
                       {/* DATE POST */}
                       <p className="text-xs">{review.date_post}</p>
