@@ -14,7 +14,7 @@ class RatingManager extends AbstractManager {
 
   findWhoAgreesByReview(idReview, isAgree) {
     return this.connection.query(
-      `select count(*) as disagree from  ${this.table} where id_review = ? and isAgree = ?`,
+      `select count(*) as isAgree from  ${this.table} where id_review = ? and isAgree = ?`,
       [idReview, isAgree]
     );
   }

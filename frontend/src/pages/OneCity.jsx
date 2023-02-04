@@ -17,8 +17,12 @@ function OneCity() {
   const { id } = useParams();
   const [reviewsCity, setReviewsCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
+  const [agrees, setAgrees] = useState(0);
+  const [disagrees, setDisagrees] = useState(0);
   // console.log(reviewsCity);
   // console.log(avgScoresCity);
+  console.warn(`who agrees ${agrees.isAgree}`);
+  console.warn(`who disagrees ${disagrees.isAgree}`);
   const getReviewsByCity = () => {
     apiConnection
       .get(`/cityReviews/${id}`)
@@ -37,9 +41,28 @@ function OneCity() {
       .catch((err) => console.error(err));
   };
 
+  const getWhoAgrees = (idReview) => {
+    apiConnection
+      .get(`/rating/${idReview}?isAgree=1`)
+      .then((agree) => {
+        setAgrees(agree.data);
+      })
+      .catch((err) => console.error(err));
+  };
+  const getWhoDisagrees = (idReview) => {
+    apiConnection
+      .get(`/rating/${idReview}?isAgree=0`)
+      .then((disagree) => {
+        setDisagrees(disagree.data);
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     getReviewsByCity();
     getAvgScoresByCity();
+    getWhoAgrees(2);
+    getWhoDisagrees(2);
   }, []);
   return (
     <div className="w-full flex flex-col items-center">

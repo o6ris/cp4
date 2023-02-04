@@ -16,7 +16,7 @@ const browse = (req, res) => {
   models.rating
     .findWhoAgreesByReview(req.params.id, req.query.isAgree)
     .then(([rows]) => {
-      res.status(200).send(rows);
+      res.status(200).send(rows[0]);
     })
     .catch((err) => {
       console.error(err);
