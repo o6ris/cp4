@@ -7,7 +7,7 @@ class ReviewManager extends AbstractManager {
 
   findAllByCity(idCity) {
     return this.connection.query(
-      `select id_city, id_user, date_post, arrival_date, return_date, security, activities, cost_of_living, environement, public_transportation, weather, shops, nightlife, comment, round((security + activities + cost_of_living + environement + public_transportation + weather + shops + nightlife)/8, 1) as avgScore, cities.name as cityName, cities.picture as cityPicture, users.alias as userAlias
+      `select ${this.table}.id, id_city, id_user, date_post, arrival_date, return_date, security, activities, cost_of_living, environement, public_transportation, weather, shops, nightlife, comment, round((security + activities + cost_of_living + environement + public_transportation + weather + shops + nightlife)/8, 1) as avgScore, cities.name as cityName, cities.picture as cityPicture, users.alias as userAlias
       from  ${this.table}
       inner join cities on ${this.table}.id_city = cities.id
       inner join users on ${this.table}.id_user = users.id

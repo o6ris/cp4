@@ -10,25 +10,17 @@ import {
   FaSnowboarding,
   FaGlassMartiniAlt,
 } from "react-icons/fa";
-import {
-  // RiDislikeFill,
-  RiDislikeLine,
-  // RiHeartFill,
-  RiHeartLine,
-} from "react-icons/ri";
 import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "@components/ButtonTemplate";
+import ButtonAgreeTemplate from "@components/ButtonAgreeTemplate";
+import ButtonDisagreeTemplate from "@components/ButtonDisagreeTemplate";
 
 function OneCity() {
   const { id } = useParams();
   const [reviewsCity, setReviewsCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
-  const [agrees, setAgrees] = useState(0);
-  const [disagrees, setDisagrees] = useState(0);
   // console.log(reviewsCity);
   // console.log(avgScoresCity);
-  console.warn(`who agrees ${agrees.isAgree}`);
-  console.warn(`who disagrees ${disagrees.isAgree}`);
   const getReviewsByCity = () => {
     apiConnection
       .get(`/cityReviews/${id}`)
@@ -47,28 +39,9 @@ function OneCity() {
       .catch((err) => console.error(err));
   };
 
-  const getWhoAgrees = (idReview) => {
-    apiConnection
-      .get(`/rating/${idReview}?isAgree=1`)
-      .then((agree) => {
-        setAgrees(agree.data);
-      })
-      .catch((err) => console.error(err));
-  };
-  const getWhoDisagrees = (idReview) => {
-    apiConnection
-      .get(`/rating/${idReview}?isAgree=0`)
-      .then((disagree) => {
-        setDisagrees(disagree.data);
-      })
-      .catch((err) => console.error(err));
-  };
-
   useEffect(() => {
     getReviewsByCity();
     getAvgScoresByCity();
-    getWhoAgrees(2);
-    getWhoDisagrees(2);
   }, []);
   return (
     <div className="w-full flex flex-col items-center pb-10">
@@ -93,7 +66,7 @@ function OneCity() {
               buttonStyle="buttonStyle"
             />
           </div>
-          {/* NOTES CRITERES */}
+          {/* NOTES MOYENNE CRITERES */}
           <div className="grid grid-cols-2 gap-4 py-6">
             <div className="countainerCriteria">
               <FaCloudSun className="iconInCountainer" />
@@ -144,7 +117,10 @@ function OneCity() {
               <h2 className="text-xl">All the Reviews</h2>
               {reviewsCity.map((review) => {
                 return (
-                  <div className="flex flex-col gap-3 bg-gray-200 p-3 rounded-lg">
+                  <div
+                    key={review.id}
+                    className="flex flex-col gap-3 bg-gray-200 p-3 rounded-lg"
+                  >
                     <div>
                       <h3 className="text-lg">
                         {review.userAlias} gave the score of {review.avgScore}
@@ -189,16 +165,12 @@ function OneCity() {
                       <p>{review.comment}</p>
                     </div>
                     <div className="flex items-center justify-between">
+                      {/* isAGREE ? */}
                       <div className="flex items-center gap-7">
-                        <div className="flex items-center gap-2">
-                          <RiHeartLine className="text-xl text-gray-400" />
-                          <p>7</p>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <RiDislikeLine className="text-xl text-gray-400" />
-                          <p>8</p>
-                        </div>
+                        <ButtonAgreeTemplate idReview={review.id} />
+                        <ButtonDisagreeTemplate idReview={review.id} />
                       </div>
+                      {/* DATE POST */}
                       <p className="text-xs">{review.date_post}</p>
                     </div>
                   </div>
