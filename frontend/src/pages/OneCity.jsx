@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   FaCloudSun,
   FaShieldAlt,
@@ -21,8 +21,10 @@ function OneCity() {
   const { user } = useContext(User.UserContext);
   const [reviewsCity, setReviewsCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
-  // console.log(reviewsCity);
-  // console.log(avgScoresCity);
+  console.log(reviewsCity)
+
+  const navigate = useNavigate();
+
   const getReviewsByCity = () => {
     apiConnection
       .get(`/cityReviews/${id}`)
@@ -66,6 +68,7 @@ function OneCity() {
               buttonType="submit"
               buttonText="Post your Review!"
               buttonStyle="buttonStyle"
+              methodOnClick={() => navigate(`/PostReview/${id}`)}
             />
           </div>
           {/* NOTES MOYENNE CRITERES */}

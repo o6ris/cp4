@@ -18,7 +18,7 @@ function InputTemplate({
   return (
     <label className={customWidth}>
       <input
-        className="focus:outline-none w-full bg-white"
+        className="focus:outline-none w-full bg-none"
         type={inputType}
         placeholder={textPlaceholder}
         value={value}
