@@ -40,7 +40,7 @@ function ButtonAgreeTemplate({ idReview, user }) {
   };
 
   /**
-   * La fonction gère l'ajout et le retrait d'un "agree" by user sur UNE review
+   * La fonction gère l'ajout, le retrait et l'edition d'un "agree" by user sur UNE review
    */
   const handleAgreed = () => {
     if (!isAgree && !isDisagree) {
@@ -55,11 +55,59 @@ function ButtonAgreeTemplate({ idReview, user }) {
           getWhoAgrees();
         })
         .catch((error) => console.error(error));
+    } else if (!isAgree && isDisagree) {
+      apiConnection
+        .put(`/rating/${idReview}`, {
+          isAgree: 1,
+        })
+        .then(() => {
+          setIsAgree(true);
+          setIsDisagree(false);
+          getWhoAgrees();
+        })
+        .catch((error) => console.error(error));
     } else {
       apiConnection
         .delete(`/rating/${idReview}`)
         .then(() => {
           setIsAgree(false);
+          getWhoAgrees();
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+  /**
+   * La fonction gère l'ajout, le retrait et l'edition d'un "disagree" by user sur UNE review
+   */
+  const handleDisagreed = () => {
+    if (!isAgree && !isDisagree) {
+      apiConnection
+        .post(`/rating`, {
+          id_user: user.id,
+          id_review: idReview,
+          isAgree: 0,
+        })
+        .then(() => {
+          setIsDisagree(true);
+          getWhoAgrees();
+        })
+        .catch((error) => console.error(error));
+    } else if (isAgree && !isDisagree) {
+      apiConnection
+        .put(`/rating/${idReview}`, {
+          isAgree: 0,
+        })
+        .then(() => {
+          setIsAgree(false);
+          setIsDisagree(true);
+          getWhoAgrees();
+        })
+        .catch((error) => console.error(error));
+    } else {
+      apiConnection
+        .delete(`/rating/${idReview}`)
+        .then(() => {
+          setIsDisagree(false);
           getWhoAgrees();
         })
         .catch((err) => console.error(err));
@@ -125,11 +173,11 @@ function ButtonAgreeTemplate({ idReview, user }) {
       </div>
       <div className="flex items-center gap-2">
         {!isDisagree ? (
-          <button type="button" onClick={handleAgreed}>
+          <button type="button" onClick={handleDisagreed}>
             <RiDislikeLine className="text-xl text-gray-400" />
           </button>
         ) : (
-          <button type="button" onClick={handleAgreed}>
+          <button type="button" onClick={handleDisagreed}>
             <RiDislikeFill className="text-xl text-gray-400" />
           </button>
         )}
