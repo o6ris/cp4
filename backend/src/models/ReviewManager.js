@@ -18,7 +18,7 @@ class ReviewManager extends AbstractManager {
 
   getAvgScores(idCity) {
     return this.connection.query(
-      `select round(avg(security),1) as avgSecurity, round(avg(activities),1) as avgActivities, round(avg(cost_of_living),1) as avgCost_of_living, round(avg(environement),1) as avgEnvironement, round(avg(public_transportation),1) as avgPublic_transportation, round(avg(weather),1) as avgWeather, round(avg(shops),1) as avgShops, round(avg(nightlife),1) as avgNightlife
+      `select round(avg(security),1) as avgSecurity, round(avg(activities),1) as avgActivities, round(avg(cost_of_living),1) as avgCost_of_living, round(avg(environement),1) as avgEnvironement, round(avg(public_transportation),1) as avgPublic_transportation, round(avg(weather),1) as avgWeather, round(avg(shops),1) as avgShops, round(avg(nightlife),1) as avgNightlife, round((avg(security) + avg(activities) + avg(cost_of_living) + avg(environement) + avg(public_transportation) + avg(weather) + avg(shops) + avg(nightlife))/8, 1) as avgTotalScore
       from ${this.table}
       where id_city = ?`,
       [idCity]
