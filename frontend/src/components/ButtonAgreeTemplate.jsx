@@ -1,13 +1,24 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
-import { RiHeartFill, RiHeartLine } from "react-icons/ri";
+import {
+  RiHeartFill,
+  RiHeartLine,
+  RiDislikeFill,
+  RiDislikeLine,
+} from "react-icons/ri";
 import apiConnection from "@services/apiConnection";
 
 function ButtonAgreeTemplate({ idReview, user }) {
   const [agreesNbr, setAgreesNbr] = useState();
+  const [disagreesNbr, setDisagreesNbr] = useState();
   const [isAgree, setIsAgree] = useState(false);
+  const [isDisagree] = useState(false);
   // console.log(agreesNbr)
 
+  /**
+   * La fonction récupère le nombre de "agree" by review
+   * @param {int} id
+   */
   const getWhoAgrees = (id) => {
     apiConnection
       .get(`/ratingNbr/${id}?isAgree=1`)
@@ -16,7 +27,22 @@ function ButtonAgreeTemplate({ idReview, user }) {
       })
       .catch((err) => console.error(err));
   };
+  /**
+   * La fonction récupère le nombre de "disagree" by review
+   * @param {int} id
+   */
+  const getWhoDisAgrees = (id) => {
+    apiConnection
+      .get(`/ratingNbr/${id}?isAgree=0`)
+      .then((disagree) => {
+        setDisagreesNbr(disagree.data.isAgree);
+      })
+      .catch((err) => console.error(err));
+  };
 
+  /**
+   * La fonction gère l'ajout et le retrait d'un "agree" by user sur UNE review
+   */
   const handleAgreed = () => {
     if (!isAgree) {
       apiConnection
@@ -41,6 +67,10 @@ function ButtonAgreeTemplate({ idReview, user }) {
     }
   };
 
+  /**
+   * La fonction check si le user à poster un "agree" sur UNE review
+   * @param {int} id
+   */
   const checkIfAgree = (id) => {
     apiConnection
       .get(`/rating/${id}?isAgree=1`)
@@ -56,6 +86,7 @@ function ButtonAgreeTemplate({ idReview, user }) {
 
   useEffect(() => {
     getWhoAgrees(idReview);
+    getWhoDisAgrees(idReview);
   }, [agreesNbr]);
 
   useEffect(() => {
@@ -63,17 +94,31 @@ function ButtonAgreeTemplate({ idReview, user }) {
   }, []);
 
   return (
-    <div className="flex items-center gap-2">
-      {!isAgree ? (
-        <button type="button" onClick={handleAgreed}>
-          <RiHeartLine className="text-xl text-gray-400" />
-        </button>
-      ) : (
-        <button type="button" onClick={handleAgreed}>
-          <RiHeartFill className="text-xl text-gray-400" />
-        </button>
-      )}
-      <p>{agreesNbr}</p>
+    <div className="flex items-center gap-7">
+      <div className="flex items-center gap-2">
+        {!isAgree ? (
+          <button type="button" onClick={handleAgreed}>
+            <RiHeartLine className="text-xl text-gray-400" />
+          </button>
+        ) : (
+          <button type="button" onClick={handleAgreed}>
+            <RiHeartFill className="text-xl text-gray-400" />
+          </button>
+        )}
+        <p>{agreesNbr}</p>
+      </div>
+      <div className="flex items-center gap-2">
+        {!isDisagree ? (
+          <button type="button" onClick={handleAgreed}>
+            <RiDislikeLine className="text-xl text-gray-400" />
+          </button>
+        ) : (
+          <button type="button" onClick={handleAgreed}>
+            <RiDislikeFill className="text-xl text-gray-400" />
+          </button>
+        )}
+        <p>{disagreesNbr}</p>
+      </div>
     </div>
   );
 }

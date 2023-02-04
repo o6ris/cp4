@@ -13,7 +13,6 @@ import {
 import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "@components/ButtonTemplate";
 import ButtonAgreeTemplate from "@components/ButtonAgreeTemplate";
-import ButtonDisagreeTemplate from "@components/ButtonDisagreeTemplate";
 
 import User from "../contexts/UserContext";
 
@@ -171,10 +170,6 @@ function OneCity() {
                       {/* isAGREE ? */}
                       <div className="flex items-center gap-7">
                         <ButtonAgreeTemplate idReview={review.id} user={user} />
-                        <ButtonDisagreeTemplate
-                          idReview={review.id}
-                          user={user}
-                        />
                       </div>
                       {/* DATE POST */}
                       <p className="text-xs">{review.date_post}</p>
