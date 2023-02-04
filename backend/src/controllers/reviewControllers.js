@@ -25,6 +25,18 @@ const browse = (req, res) => {
     });
 };
 
+const browseAvgScore = (req, res) => {
+  models.reviews
+    .getAvgScores(req.params.id)
+    .then(([rows]) => {
+      res.status(200).send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const add = (req, res) => {
   const review = req.body;
   review.dateReview = datePost();
@@ -53,5 +65,6 @@ const add = (req, res) => {
 
 module.exports = {
   browse,
+  browseAvgScore,
   add,
 };
