@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import {
+  FaCloudSun,
+  // FaShieldAlt,
+  // FaCoins,
+  // FaTree,
+  // FaTrain,
+  // FaShoppingBag,
+  // FaSnowboarding,
+  // FaGlassMartiniAlt,
+} from "react-icons/fa";
 
 import apiConnection from "@services/apiConnection";
 import InputTemplate from "@components/InputTemplate";
@@ -20,6 +30,19 @@ function PostReview() {
     activities: 0,
     nightlife: 0,
     comment: "",
+  });
+
+  /**
+   * Cette partie gère la couleur de fond de la barre du slider
+   */
+  const rangeInput = document.querySelector('input[type="range"]');
+  rangeInput.addEventListener("input", () => {
+    const val = rangeInput.value;
+    const percentage = val / 10;
+    const color = `linear-gradient(to right, #d46a6a ${
+      percentage * 100
+    }%, grey ${percentage * 100}%)`;
+    rangeInput.style.background = color;
   });
 
   const handleInputOnChange = (place, value) => {
@@ -70,6 +93,7 @@ function PostReview() {
           </div>
           {/* FORMULAIRE */}
           <form className="flex flex-col items-center justify-center w-full gap-5 py-6">
+            {/* DATES */}
             <div className="flex flex-col items-center gap-1 w-full">
               <p className="w-9/12 ml-5">Arrival Date</p>
               <InputTemplate
@@ -87,6 +111,26 @@ function PostReview() {
                 methodOnChange={handleInputOnChange}
                 name="return_date"
               />
+            </div>
+            {/* CRITERIAS */}
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex gap-2 items-center">
+                <FaCloudSun className="iconColor text-xl" />
+                <h3 className="text-xl">Weather</h3>
+              </div>
+              <div className="flex relative w-72 rounded-md overflow-hidden bg-gray-300 p-5 gap-4 items-center justify-between">
+                <input
+                  onChange={(e) =>
+                    handleInputOnChange(e.target.name, e.target.value)
+                  }
+                  name="weather"
+                  type="range"
+                  min="0"
+                  max="10"
+                  className="w-9/12 custom-slider bg-red-500 rounded-sm"
+                />
+                <p className="text-3xl">{review.weather}</p>
+              </div>
             </div>
           </form>
         </>
