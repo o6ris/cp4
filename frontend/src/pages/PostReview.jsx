@@ -13,6 +13,7 @@ import {
 import InputTemplate from "@components/InputTemplate";
 import RangeInputTemplate from "@components/RangeInputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
+import ModalTemplate from "@components/ModalTemplate";
 import apiConnection from "@services/apiConnection";
 
 import User from "../contexts/UserContext";
@@ -20,6 +21,7 @@ import User from "../contexts/UserContext";
 function PostReview() {
   const { id } = useParams();
   const { user } = useContext(User.UserContext);
+  const [displayModal, setDisplayModal] = useState(false);
   const [city, setCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
   const [review, setReview] = useState({
@@ -67,9 +69,9 @@ function PostReview() {
       .post(`/review`, {
         ...review,
       })
-      .then((result) => {
+      .then(() => {
         // notify("Review successfully added!");
-        console.warn(result);
+        setDisplayModal(false);
       })
       .catch((error) => console.error(error));
   };
@@ -220,8 +222,14 @@ function PostReview() {
               buttonType="button"
               buttonText="Add Review"
               buttonStyle="buttonStyle"
-              methodOnClick={handleAddReview}
+              methodOnClick={setDisplayModal}
             />
+            {displayModal && (
+              <ModalTemplate
+                setDisplayModal={setDisplayModal}
+                confirmPost={handleAddReview}
+              />
+            )}
           </form>
         </>
       )}
