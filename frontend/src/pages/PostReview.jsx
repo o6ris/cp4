@@ -73,18 +73,22 @@ function PostReview() {
   };
 
   const handleAddReview = () => {
+    apiConnection
+      .post(`/review`, {
+        ...review,
+      })
+      .then(() => {
+        notify("Review successfully posted!");
+        setDisplayModal(false);
+        setTimeout(() => navigate(`/OneCity/${id}`), 3000);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleCheckBeforePost = () => {
     const { status, errorMessage } = validateReview(review);
     if (status) {
-      apiConnection
-        .post(`/review`, {
-          ...review,
-        })
-        .then(() => {
-          notify("Review successfully posted!");
-          setDisplayModal(false);
-          setTimeout(() => navigate(`/OneCity/${id}`), 3000);
-        })
-        .catch((error) => console.error(error));
+      setDisplayModal(true);
     } else {
       notify(errorMessage);
     }
@@ -251,7 +255,7 @@ function PostReview() {
                 buttonType="button"
                 buttonText="Add Review"
                 buttonStyle="buttonStyle"
-                methodOnClick={setDisplayModal}
+                methodOnClick={handleCheckBeforePost}
               />
               {displayModal && (
                 <ModalTemplate
