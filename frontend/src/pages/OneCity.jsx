@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   FaCloudSun,
   FaShieldAlt,
@@ -13,6 +13,7 @@ import {
 import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "@components/ButtonTemplate";
 import ButtonIsAgreeTemplate from "@components/ButtonIsAgreeTemplate";
+import CardCriteriaTemplate from "@components/CardCriteriaTemplate";
 
 import User from "../contexts/UserContext";
 
@@ -21,8 +22,9 @@ function OneCity() {
   const { user } = useContext(User.UserContext);
   const [reviewsCity, setReviewsCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
-  // console.log(reviewsCity);
-  // console.log(avgScoresCity);
+
+  const navigate = useNavigate();
+
   const getReviewsByCity = () => {
     apiConnection
       .get(`/cityReviews/${id}`)
@@ -66,52 +68,51 @@ function OneCity() {
               buttonType="submit"
               buttonText="Post your Review!"
               buttonStyle="buttonStyle"
+              methodOnClick={() => navigate(`/PostReview/${id}`)}
             />
           </div>
           {/* NOTES MOYENNE CRITERES */}
           <div className="grid grid-cols-2 gap-4 py-6">
-            <div className="countainerCriteria">
-              <FaCloudSun className="iconInCountainer" />
-              <h3 className="text-sm">Whether</h3>
-              <h3 className="text-2xl">{avgScoresCity.avgWeather}</h3>
-            </div>
-            <div className="countainerCriteria">
-              <FaShieldAlt className="iconInCountainer" />
-              <h3 className="text-sm">Security</h3>
-              <h3 className="text-2xl">{avgScoresCity.avgSecurity}</h3>
-            </div>
-            <div className="countainerCriteria">
-              <FaCoins className="iconInCountainer" />
-              <h3 className="text-sm">Cost of Living</h3>
-              <h3 className="text-2xl">{avgScoresCity.avgCost_of_living}</h3>
-            </div>
-            <div className="countainerCriteria">
-              <FaTree className="iconInCountainer" />
-              <h3 className="text-sm">Environement</h3>
-              <h3 className="text-2xl">{avgScoresCity.avgEnvironement}</h3>
-            </div>
-            <div className="countainerCriteria">
-              <FaTrain className="iconInCountainer" />
-              <h3 className="text-sm">Public Transportation</h3>
-              <h3 className="text-2xl">
-                {avgScoresCity.avgPublic_transportation}
-              </h3>
-            </div>
-            <div className="countainerCriteria">
-              <FaShoppingBag className="iconInCountainer" />
-              <h3 className="text-sm">Shops Facilities</h3>
-              <h3 className="text-2xl">{avgScoresCity.avgShops}</h3>
-            </div>
-            <div className="countainerCriteria">
-              <FaSnowboarding className="iconInCountainer" />
-              <h3 className="text-sm">Activities</h3>
-              <h3 className="text-2xl">{avgScoresCity.avgActivities}</h3>
-            </div>
-            <div className="countainerCriteria">
-              <FaGlassMartiniAlt className="iconInCountainer" />
-              <h3 className="text-sm">Nightlife</h3>
-              <h3 className="text-2xl">{avgScoresCity.avgNightlife}</h3>
-            </div>
+            <CardCriteriaTemplate
+              icon={<FaCloudSun className="iconInCountainer" />}
+              criteria="Whether"
+              score={avgScoresCity.avgWeather}
+            />
+            <CardCriteriaTemplate
+              icon={<FaShieldAlt className="iconInCountainer" />}
+              criteria="Security"
+              score={avgScoresCity.avgSecurity}
+            />
+            <CardCriteriaTemplate
+              icon={<FaCoins className="iconInCountainer" />}
+              criteria="Cost of Living"
+              score={avgScoresCity.avgCost_of_living}
+            />
+            <CardCriteriaTemplate
+              icon={<FaTree className="iconInCountainer" />}
+              criteria="Environement"
+              score={avgScoresCity.avgEnvironement}
+            />
+            <CardCriteriaTemplate
+              icon={<FaTrain className="iconInCountainer" />}
+              criteria="Public Transportation"
+              score={avgScoresCity.avgPublic_transportation}
+            />
+            <CardCriteriaTemplate
+              icon={<FaShoppingBag className="iconInCountainer" />}
+              criteria="Shops Facilities"
+              score={avgScoresCity.avgShops}
+            />
+            <CardCriteriaTemplate
+              icon={<FaSnowboarding className="iconInCountainer" />}
+              criteria="Activities"
+              score={avgScoresCity.avgActivities}
+            />
+            <CardCriteriaTemplate
+              icon={<FaGlassMartiniAlt className="iconInCountainer" />}
+              criteria="Nightlife"
+              score={avgScoresCity.avgNightlife}
+            />
           </div>
           {/* LES REVIEWS */}
           <div>

@@ -8,6 +8,7 @@ import {
 import Login from "@pages/Login";
 import SearchCity from "@pages/SearchCity";
 import OneCity from "@pages/OneCity";
+import PostReview from "@pages/PostReview";
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,6 +22,7 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/FindCity" element={<SearchCity />} />
           <Route path="/OneCity/:id" element={<OneCity />} />
+          <Route path="/PostReview/:id" element={<PostReview />} />
         </Routes>
       </div>
     </Router>

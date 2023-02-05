@@ -5,7 +5,7 @@
 @layer components {
   /* style input */
   .inputStyle {
-    @apply border-solid border-primary border-2 rounded-md p-3 w-9/12 lg:w-1/2;
+    @apply border-solid border-primary border-2 rounded-md p-3 w-11/12 lg:w-1/2;
   }
   /* style des boutons */
   .buttonStyle {
@@ -33,4 +33,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+input[type="range"] {
+  -webkit-appearance: none; /* retire l'apparence originale */
+  height: 10px;
+  background: grey;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* retire l'apparence originale */
+  height: 30px;
+  width: 20px;
+  border-radius: 10px;
+  background: #d46a6a; /* couleur curseur */
+  cursor: pointer;
+  box-shadow: 0 0 2px 0 #555; /* ombre portée du curseur */
 }

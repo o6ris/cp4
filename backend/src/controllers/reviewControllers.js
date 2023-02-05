@@ -3,7 +3,7 @@ const models = require("../models");
 const datePost = () => {
   const year = new Date().getFullYear();
   let month = new Date().getMonth() + 1;
-  let date = new Date().getDate() + 1;
+  let date = new Date().getDate();
   if (month < 10) {
     month = `0${month}`;
   }
@@ -54,7 +54,7 @@ const add = (req, res) => {
             res.sendStatus(500);
           });
       } else {
-        res.send("You have already posted a review!");
+        res.status(401).send("You have already posted a review!");
       }
     })
     .catch((err) => {

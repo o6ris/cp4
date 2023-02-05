@@ -18,7 +18,7 @@ router.get("/cities/:id", cityControllers.read);
 
 router.get("/cityReviews/:id", reviewControllers.browse);
 router.get("/cityScores/:id", reviewControllers.browseAvgScore);
-router.post("/review", reviewControllers.add);
+router.post("/review", validators.validateReview, reviewControllers.add);
 
 // -- Route just to displayed all rating for DEV
 router.get("/allRatings/:id", ratingControllers.displayAll);
