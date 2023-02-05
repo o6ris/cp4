@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -10,19 +10,26 @@ import SearchCity from "@pages/SearchCity";
 import OneCity from "@pages/OneCity";
 import PostReview from "@pages/PostReview";
 
+import User from "./contexts/UserContext";
+
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+  const { user } = useContext(User.UserContext);
   return (
     <Router>
       <div>
         <Routes>
           <Route path="/" element={<Navigate replace to="/Login" />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/FindCity" element={<SearchCity />} />
-          <Route path="/OneCity/:id" element={<OneCity />} />
-          <Route path="/PostReview/:id" element={<PostReview />} />
+          {user && (
+            <>
+              <Route path="/FindCity" element={<SearchCity />} />
+              <Route path="/OneCity/:id" element={<OneCity />} />
+              <Route path="/PostReview/:id" element={<PostReview />} />
+            </>
+          )}
         </Routes>
       </div>
     </Router>
