@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import {
   FaCloudSun,
@@ -46,6 +46,8 @@ function PostReview() {
     toast(msg);
   };
 
+  const navigate = useNavigate();
+
   const handleInputOnChange = (place, value) => {
     const newreview = { ...review };
     newreview[place] = value;
@@ -80,6 +82,7 @@ function PostReview() {
         .then(() => {
           notify("Review successfully posted!");
           setDisplayModal(false);
+          setTimeout(() => navigate(`/OneCity/${id}`), 3000);
         })
         .catch((error) => console.error(error));
     } else {
