@@ -238,7 +238,9 @@ function PostReview() {
                   name="comment"
                   rows="7"
                 />
-                <p className="text-xs">Enter between 80 and 1000 characters</p>
+                <p className="text-xs">
+                  Your comment must contain 80 to 1000 characters
+                </p>
               </div>
 
               {/* SUBMIT FORM */}
@@ -252,6 +254,7 @@ function PostReview() {
                 <ModalTemplate
                   setDisplayModal={setDisplayModal}
                   confirmPost={handleAddReview}
+                  review={review}
                 />
               )}
             </form>
