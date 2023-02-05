@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 import InputTemplate from "@components/InputTemplate";
 import RangeInputTemplate from "@components/RangeInputTemplate";
+import ButtonTemplate from "@components/ButtonTemplate";
 import apiConnection from "@services/apiConnection";
 
 function PostReview() {
@@ -82,7 +83,7 @@ function PostReview() {
           <form className="flex flex-col items-center justify-center w-full gap-5 py-6">
             {/* DATES */}
             <div className="flex flex-col items-center gap-1 w-full">
-              <p className="w-9/12 ml-5">Arrival Date</p>
+              <p className="w-11/12 ml-5">Arrival Date</p>
               <InputTemplate
                 customWidth="inputStyle"
                 inputType="date"
@@ -91,7 +92,7 @@ function PostReview() {
               />
             </div>
             <div className="flex flex-col items-center gap-1 w-full">
-              <p className="w-9/12 ml-5">Departure Date</p>
+              <p className="w-11/12 ml-5">Departure Date</p>
               <InputTemplate
                 customWidth="inputStyle"
                 inputType="date"
@@ -100,8 +101,8 @@ function PostReview() {
               />
             </div>
             {/* CRITERIAS */}
-            <div className="flex flex-col items-center gap-2 mt-5">
-              {/* SLIDER */}
+            <div className="flex flex-col items-center gap-7 mt-5">
+              {/* ALL SLIDERS */}
               <RangeInputTemplate
                 methodOnChange={handleInputOnChange}
                 score={review.weather}
@@ -109,6 +110,7 @@ function PostReview() {
                 idCriteria="weather"
                 criteria="Weather"
                 icon={<FaCloudSun className="iconColor text-xl" />}
+                tip="0 for a bad weather, 10 for a wonderful weather"
               />
               <RangeInputTemplate
                 methodOnChange={handleInputOnChange}
@@ -117,6 +119,7 @@ function PostReview() {
                 idCriteria="activities"
                 criteria="Activities"
                 icon={<FaSnowboarding className="iconColor text-xl" />}
+                tip="0 for few activities, 10 for many activities"
               />
               <RangeInputTemplate
                 methodOnChange={handleInputOnChange}
@@ -125,6 +128,7 @@ function PostReview() {
                 idCriteria="security"
                 criteria="Security"
                 icon={<FaShieldAlt className="iconColor text-xl" />}
+                tip="0 for unsafe, 10 for very safe"
               />
               <RangeInputTemplate
                 methodOnChange={handleInputOnChange}
@@ -133,6 +137,7 @@ function PostReview() {
                 idCriteria="cost_of_living"
                 criteria="Cost of Living"
                 icon={<FaCoins className="iconColor text-xl" />}
+                tip="0 for very expensive life, 10 for cheap life"
               />
               <RangeInputTemplate
                 methodOnChange={handleInputOnChange}
@@ -141,6 +146,7 @@ function PostReview() {
                 idCriteria="environement"
                 criteria="Environement"
                 icon={<FaTree className="iconColor text-xl" />}
+                tip="0 for poor environment, 10 for beautiful environment"
               />
               <RangeInputTemplate
                 methodOnChange={handleInputOnChange}
@@ -149,6 +155,7 @@ function PostReview() {
                 idCriteria="public_transportation"
                 criteria="Public transportation"
                 icon={<FaTrain className="iconColor text-xl" />}
+                tip="0 for a crappy transport network, 10 for a great one"
               />
               <RangeInputTemplate
                 methodOnChange={handleInputOnChange}
@@ -157,6 +164,7 @@ function PostReview() {
                 idCriteria="shops"
                 criteria="Shopping facilities"
                 icon={<FaShoppingBag className="iconColor text-xl" />}
+                tip="0 for very little shops and 10 for a lot"
               />
               <RangeInputTemplate
                 methodOnChange={handleInputOnChange}
@@ -165,8 +173,25 @@ function PostReview() {
                 idCriteria="nightlife"
                 criteria="Nightlife"
                 icon={<FaGlassMartiniAlt className="iconColor text-xl" />}
+                tip="0 if it sucked and 10 if you can had fun all night"
               />
             </div>
+            <hr className="w-6/12 bg-gray-300" />
+            <p className="w-9/12 text-center">
+              For the next step, detail your pros and cons about your
+              destination. Please be as precise and honest as possible, your
+              opinion will interest everyone!
+            </p>
+            <div className="flex flex-col items-center w-full">
+              <textarea className="inputStyle" name="comment" id="" rows="7" />
+              <p className="text-xs">Enter between 80 and 1000 characters</p>
+            </div>
+            <ButtonTemplate
+              buttonType="submit"
+              buttonText="Add Review"
+              buttonStyle="buttonStyle"
+              // methodOnClick={handleLogin}
+            />
           </form>
         </>
       )}

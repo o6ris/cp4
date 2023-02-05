@@ -5,7 +5,7 @@
 @layer components {
   /* style input */
   .inputStyle {
-    @apply border-solid border-primary border-2 rounded-md p-3 w-9/12 lg:w-1/2;
+    @apply border-solid border-primary border-2 rounded-md p-3 w-11/12 lg:w-1/2;
   }
   /* style des boutons */
   .buttonStyle {
