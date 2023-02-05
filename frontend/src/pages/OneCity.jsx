@@ -129,7 +129,8 @@ function OneCity() {
                         {review.userAlias} gave the score of {review.avgScore}
                       </h3>
                       <p className="text-sm">
-                        Trip date : {review.arrival_date} - {review.return_date}
+                        Trip date : {review.arrival_date.slice(0, 10)} -{" "}
+                        {review.return_date.slice(0, 10)}
                       </p>
                     </div>
                     <ul className="grid grid-cols-6 gap-x-4 wrap">
@@ -176,7 +177,7 @@ function OneCity() {
                         />
                       </div>
                       {/* DATE POST */}
-                      <p className="text-xs">{review.date_post}</p>
+                      <p className="text-xs">{review.date_post.slice(0, 10)}</p>
                     </div>
                   </div>
                 );
