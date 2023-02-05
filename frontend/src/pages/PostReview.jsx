@@ -15,6 +15,7 @@ import InputTemplate from "@components/InputTemplate";
 import RangeInputTemplate from "@components/RangeInputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 import ModalTemplate from "@components/ModalTemplate";
+import validateReview from "@services/reviewValidator";
 import apiConnection from "@services/apiConnection";
 
 import User from "../contexts/UserContext";
@@ -70,15 +71,20 @@ function PostReview() {
   };
 
   const handleAddReview = () => {
-    apiConnection
-      .post(`/review`, {
-        ...review,
-      })
-      .then(() => {
-        notify("Review successfully posted!");
-        setDisplayModal(false);
-      })
-      .catch((error) => console.error(error));
+    const { status, errorMessage } = validateReview(review);
+    if (status) {
+      apiConnection
+        .post(`/review`, {
+          ...review,
+        })
+        .then(() => {
+          notify("Review successfully posted!");
+          setDisplayModal(false);
+        })
+        .catch((error) => console.error(error));
+    } else {
+      notify(errorMessage);
+    }
   };
 
   useEffect(() => {
