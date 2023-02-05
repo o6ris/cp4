@@ -11,7 +11,8 @@ class ReviewManager extends AbstractManager {
       from  ${this.table}
       inner join cities on ${this.table}.id_city = cities.id
       inner join users on ${this.table}.id_user = users.id
-      where id_city = ?`,
+      where id_city = ?
+      ORDER BY date_post DESC`,
       [idCity]
     );
   }
