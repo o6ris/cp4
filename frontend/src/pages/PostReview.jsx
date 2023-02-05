@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   FaCloudSun,
-  // FaShieldAlt,
-  // FaCoins,
-  // FaTree,
-  // FaTrain,
-  // FaShoppingBag,
-  // FaSnowboarding,
-  // FaGlassMartiniAlt,
+  FaSnowboarding,
+  FaShieldAlt,
+  FaCoins,
+  FaTree,
+  FaTrain,
+  FaShoppingBag,
+  FaGlassMartiniAlt,
 } from "react-icons/fa";
-
-import apiConnection from "@services/apiConnection";
 import InputTemplate from "@components/InputTemplate";
+import RangeInputTemplate from "@components/RangeInputTemplate";
+import apiConnection from "@services/apiConnection";
 
 function PostReview() {
   const { id } = useParams();
@@ -30,19 +30,6 @@ function PostReview() {
     activities: 0,
     nightlife: 0,
     comment: "",
-  });
-
-  /**
-   * Cette partie gère la couleur de fond de la barre du slider
-   */
-  const rangeInput = document.querySelector('input[type="range"]');
-  rangeInput.addEventListener("input", () => {
-    const val = rangeInput.value;
-    const percentage = val / 10;
-    const color = `linear-gradient(to right, #d46a6a ${
-      percentage * 100
-    }%, grey ${percentage * 100}%)`;
-    rangeInput.style.background = color;
   });
 
   const handleInputOnChange = (place, value) => {
@@ -113,24 +100,72 @@ function PostReview() {
               />
             </div>
             {/* CRITERIAS */}
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex gap-2 items-center">
-                <FaCloudSun className="iconColor text-xl" />
-                <h3 className="text-xl">Weather</h3>
-              </div>
-              <div className="flex relative w-72 rounded-md overflow-hidden bg-gray-300 p-5 gap-4 items-center justify-between">
-                <input
-                  onChange={(e) =>
-                    handleInputOnChange(e.target.name, e.target.value)
-                  }
-                  name="weather"
-                  type="range"
-                  min="0"
-                  max="10"
-                  className="w-9/12 custom-slider bg-red-500 rounded-sm"
-                />
-                <p className="text-3xl">{review.weather}</p>
-              </div>
+            <div className="flex flex-col items-center gap-2 mt-5">
+              {/* SLIDER */}
+              <RangeInputTemplate
+                methodOnChange={handleInputOnChange}
+                score={review.weather}
+                name="weather"
+                idCriteria="weather"
+                criteria="Weather"
+                icon={<FaCloudSun className="iconColor text-xl" />}
+              />
+              <RangeInputTemplate
+                methodOnChange={handleInputOnChange}
+                score={review.activities}
+                name="activities"
+                idCriteria="activities"
+                criteria="Activities"
+                icon={<FaSnowboarding className="iconColor text-xl" />}
+              />
+              <RangeInputTemplate
+                methodOnChange={handleInputOnChange}
+                score={review.security}
+                name="security"
+                idCriteria="security"
+                criteria="Security"
+                icon={<FaShieldAlt className="iconColor text-xl" />}
+              />
+              <RangeInputTemplate
+                methodOnChange={handleInputOnChange}
+                score={review.cost_of_living}
+                name="cost_of_living"
+                idCriteria="cost_of_living"
+                criteria="Cost of Living"
+                icon={<FaCoins className="iconColor text-xl" />}
+              />
+              <RangeInputTemplate
+                methodOnChange={handleInputOnChange}
+                score={review.environement}
+                name="environement"
+                idCriteria="environement"
+                criteria="Environement"
+                icon={<FaTree className="iconColor text-xl" />}
+              />
+              <RangeInputTemplate
+                methodOnChange={handleInputOnChange}
+                score={review.public_transportation}
+                name="public_transportation"
+                idCriteria="public_transportation"
+                criteria="Public transportation"
+                icon={<FaTrain className="iconColor text-xl" />}
+              />
+              <RangeInputTemplate
+                methodOnChange={handleInputOnChange}
+                score={review.shops}
+                name="shops"
+                idCriteria="shops"
+                criteria="Shopping facilities"
+                icon={<FaShoppingBag className="iconColor text-xl" />}
+              />
+              <RangeInputTemplate
+                methodOnChange={handleInputOnChange}
+                score={review.nightlife}
+                name="nightlife"
+                idCriteria="nightlife"
+                criteria="Nightlife"
+                icon={<FaGlassMartiniAlt className="iconColor text-xl" />}
+              />
             </div>
           </form>
         </>
