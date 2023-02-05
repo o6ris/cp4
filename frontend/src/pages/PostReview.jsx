@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import {
   FaCloudSun,
@@ -15,11 +15,16 @@ import RangeInputTemplate from "@components/RangeInputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 import apiConnection from "@services/apiConnection";
 
+import User from "../contexts/UserContext";
+
 function PostReview() {
   const { id } = useParams();
+  const { user } = useContext(User.UserContext);
   const [city, setCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
   const [review, setReview] = useState({
+    id_city: id,
+    id_user: user?.id,
     arrival_date: "",
     return_date: "",
     weather: 0,
@@ -32,7 +37,7 @@ function PostReview() {
     nightlife: 0,
     comment: "",
   });
-
+  // console.log(review)
   const handleInputOnChange = (place, value) => {
     const newreview = { ...review };
     newreview[place] = value;
@@ -57,6 +62,18 @@ function PostReview() {
       .catch((err) => console.error(err));
   };
 
+  const handleAddReview = () => {
+    apiConnection
+      .post(`/review`, {
+        ...review,
+      })
+      .then((result) => {
+        // notify("Review successfully added!");
+        console.warn(result);
+      })
+      .catch((error) => console.error(error));
+  };
+
   useEffect(() => {
     getCity(id);
     getAvgScoresByCity();
@@ -79,6 +96,7 @@ function PostReview() {
               {city.name} awaits your review!
             </h1>
           </div>
+
           {/* FORMULAIRE */}
           <form className="flex flex-col items-center justify-center w-full gap-5 py-6">
             {/* DATES */}
@@ -100,6 +118,7 @@ function PostReview() {
                 name="return_date"
               />
             </div>
+
             {/* CRITERIAS */}
             <div className="flex flex-col items-center gap-7 mt-5">
               {/* ALL SLIDERS */}
@@ -176,6 +195,8 @@ function PostReview() {
                 tip="0 if it sucked and 10 if you can had fun all night"
               />
             </div>
+
+            {/* COMMENT */}
             <hr className="w-6/12 bg-gray-300" />
             <p className="w-9/12 text-center">
               For the next step, detail your pros and cons about your
@@ -183,14 +204,23 @@ function PostReview() {
               opinion will interest everyone!
             </p>
             <div className="flex flex-col items-center w-full">
-              <textarea className="inputStyle" name="comment" id="" rows="7" />
+              <textarea
+                onChange={(e) =>
+                  handleInputOnChange(e.target.name, e.target.value)
+                }
+                className="inputStyle"
+                name="comment"
+                rows="7"
+              />
               <p className="text-xs">Enter between 80 and 1000 characters</p>
             </div>
+
+            {/* SUBMIT FORM */}
             <ButtonTemplate
-              buttonType="submit"
+              buttonType="button"
               buttonText="Add Review"
               buttonStyle="buttonStyle"
-              // methodOnClick={handleLogin}
+              methodOnClick={handleAddReview}
             />
           </form>
         </>

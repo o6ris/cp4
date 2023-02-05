@@ -54,7 +54,7 @@ const add = (req, res) => {
             res.sendStatus(500);
           });
       } else {
-        res.send("You have already posted a review!");
+        res.status(401).send("You have already posted a review!");
       }
     })
     .catch((err) => {
