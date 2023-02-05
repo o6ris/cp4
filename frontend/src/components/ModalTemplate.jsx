@@ -21,12 +21,9 @@ function Modal({ setDisplayModal, confirmPost, review }) {
     <div>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
       <div className="fixed inset-0 z-10 overflow-y-auto">
-        <div
-          className="flex flex-col items-center w-full py-20 px-2
-         gap-y-7"
-        >
+        <div className="flex flex-col items-center w-full py-10 px-2">
           <div className="overflow-hidden rounded-lg bg-white shadow-xl transition-all max-w-lg">
-            <div className="p-3">
+            <div className="flex flex-col items-center p-4">
               <h3
                 className="text-lg font-medium leading-6 text-gray-900"
                 id="modal-title"
