@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 import {
   FaCloudSun,
   FaSnowboarding,
@@ -113,6 +114,14 @@ function PostReview() {
         pauseOnHover
         theme="dark"
       />
+      <Helmet>
+        <meta charSet="utf-8" />
+        {city && <title>City Rater - Rate {city?.name}</title>}
+        <meta
+          name="description"
+          content="Give your opinion on a city destination and help others make a decision."
+        />
+      </Helmet>
       <GobackButtonTemplate navigate={() => navigate(`/OneCity/${id}`)} />
       <div className="w-full flex flex-col items-center pb-10">
         {city && avgScoresCity && (
