@@ -16,16 +16,22 @@ import ButtonTemplate from "@components/ButtonTemplate";
 import ButtonIsAgreeTemplate from "@components/ButtonIsAgreeTemplate";
 import CardCriteriaTemplate from "@components/CardCriteriaTemplate";
 import GobackButtonTemplate from "@components/GobackButtonTemplate";
+import LogOutButton from "@components/LogOutButton";
 
 import User from "../contexts/UserContext";
 
 function OneCity() {
   const { id } = useParams();
-  const { user } = useContext(User.UserContext);
+  const { user, handleUser } = useContext(User.UserContext);
   const [reviewsCity, setReviewsCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
 
   const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    handleUser(null);
+    navigate("/");
+  };
 
   const getReviewsByCity = () => {
     apiConnection
@@ -59,6 +65,7 @@ function OneCity() {
           content="Find out more about a city destination, including user reviews."
         />
       </Helmet>
+      <LogOutButton handleLogOut={handleLogOut} />
       <GobackButtonTemplate navigate={() => navigate("/FindCity")} />
       <div className="w-full flex flex-col items-center pb-10">
         {reviewsCity && avgScoresCity && (

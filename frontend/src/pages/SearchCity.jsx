@@ -2,15 +2,21 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import SearchBar from "@components/SearchbarTemplate";
+import LogOutButton from "@components/LogOutButton";
 import apiConnection from "@services/apiConnection";
 
 import User from "../contexts/UserContext";
 
 function SearchCity() {
-  const { user } = useContext(User.UserContext);
+  const { user, handleUser } = useContext(User.UserContext);
   const [cities, setCities] = useState([]);
 
   const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    handleUser(null);
+    navigate("/");
+  };
 
   const getCities = () => {
     apiConnection
@@ -36,6 +42,7 @@ function SearchCity() {
           content="Search for city destinations from our selection and read user reviews."
         />
       </Helmet>
+      <LogOutButton handleLogOut={handleLogOut} />
       <div className=" flex flex-col items-center w-full pt-5">
         <img className="h-20" src="../assets/logo.png" alt="" />
         <p className="text-xs">Find and rate your destination!</p>
