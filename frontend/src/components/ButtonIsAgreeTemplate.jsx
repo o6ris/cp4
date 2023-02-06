@@ -108,7 +108,7 @@ function ButtonIsAgreeTemplate({ idReview, user }) {
         .delete(`/rating/${idReview}`)
         .then(() => {
           setIsDisagree(false);
-          getWhoAgrees();
+          getWhoDisAgrees();
         })
         .catch((err) => console.error(err));
     }
