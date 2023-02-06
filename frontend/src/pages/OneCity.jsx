@@ -14,9 +14,9 @@ import apiConnection from "@services/apiConnection";
 import ButtonTemplate from "@components/ButtonTemplate";
 import ButtonIsAgreeTemplate from "@components/ButtonIsAgreeTemplate";
 import CardCriteriaTemplate from "@components/CardCriteriaTemplate";
+import GobackButtonTemplate from "@components/GobackButtonTemplate";
 
 import User from "../contexts/UserContext";
-import GobackButtonTemplate from "@components/GobackButtonTemplate";
 
 function OneCity() {
   const { id } = useParams();
@@ -50,9 +50,7 @@ function OneCity() {
   }, []);
   return (
     <>
-      <div className="relative">
-        <GobackButtonTemplate />
-      </div>
+      <GobackButtonTemplate navigate={() => navigate("/FindCity")} />
       <div className="w-full flex flex-col items-center pb-10">
         {reviewsCity && avgScoresCity && (
           <>

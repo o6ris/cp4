@@ -16,6 +16,7 @@ import RangeInputTemplate from "@components/RangeInputTemplate";
 import ButtonTemplate from "@components/ButtonTemplate";
 import ModalTemplate from "@components/ModalTemplate";
 import validateReview from "@services/reviewValidator";
+import GobackButtonTemplate from "@components/GobackButtonTemplate";
 import apiConnection from "@services/apiConnection";
 
 import User from "../contexts/UserContext";
@@ -112,6 +113,7 @@ function PostReview() {
         pauseOnHover
         theme="dark"
       />
+      <GobackButtonTemplate navigate={() => navigate(`/OneCity/${id}`)} />
       <div className="w-full flex flex-col items-center pb-10">
         {city && avgScoresCity && (
           <>
