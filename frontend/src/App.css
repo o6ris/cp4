@@ -25,10 +25,9 @@
     @apply flex flex-col items-center justify-center gap-3 border shadow-md shadow-[#4B4E6D]/50 w-40 h-40 rounded-lg;
   }
   .countainerReview {
-    @apply flex flex-col gap-3 p-3 rounded-lg border shadow-md shadow-[#4B4E6D]/50
+    @apply flex flex-col gap-3 p-3 rounded-lg border shadow-md shadow-[#4B4E6D]/50;
   }
   .countainerReview p {
-    
   }
 }
 
@@ -42,7 +41,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 500;
 }
 
@@ -59,7 +60,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 30px;
   width: 20px;
   border-radius: 10px;
-  background: #6A8D92; /* couleur curseur */
+  background: #6a8d92; /* couleur curseur */
   cursor: pointer;
   box-shadow: 0 0 2px 0 #555; /* ombre portée du curseur */
 }
