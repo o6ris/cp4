@@ -18,13 +18,14 @@ import ButtonTemplate from "@components/ButtonTemplate";
 import ModalTemplate from "@components/ModalTemplate";
 import validateReview from "@services/reviewValidator";
 import GobackButtonTemplate from "@components/GobackButtonTemplate";
+import LogOutButton from "@components/LogOutButton";
 import apiConnection from "@services/apiConnection";
 
 import User from "../contexts/UserContext";
 
 function PostReview() {
   const { id } = useParams();
-  const { user } = useContext(User.UserContext);
+  const { user, handleUser } = useContext(User.UserContext);
   const [displayModal, setDisplayModal] = useState(false);
   const [city, setCity] = useState();
   const [avgScoresCity, setAvgScoresCity] = useState();
@@ -49,6 +50,11 @@ function PostReview() {
   };
 
   const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    handleUser(null);
+    navigate("/");
+  };
 
   const handleInputOnChange = (place, value) => {
     const newreview = { ...review };
@@ -122,6 +128,7 @@ function PostReview() {
           content="Give your opinion on a city destination and help others make a decision."
         />
       </Helmet>
+      <LogOutButton handleLogOut={handleLogOut} />
       <GobackButtonTemplate navigate={() => navigate(`/OneCity/${id}`)} />
       <div className="w-full flex flex-col items-center pb-10">
         {city && avgScoresCity && (
