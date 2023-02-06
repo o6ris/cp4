@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import {
   FaCloudSun,
   FaShieldAlt,
@@ -50,6 +51,14 @@ function OneCity() {
   }, []);
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        {reviewsCity && <title>City Rater - {reviewsCity[0]?.cityName}</title>}
+        <meta
+          name="description"
+          content="Find out more about a city destination, including user reviews."
+        />
+      </Helmet>
       <GobackButtonTemplate navigate={() => navigate("/FindCity")} />
       <div className="w-full flex flex-col items-center pb-10">
         {reviewsCity && avgScoresCity && (
