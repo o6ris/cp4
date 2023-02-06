@@ -18,9 +18,9 @@ function ButtonIsAgreeTemplate({ idReview, user }) {
    * La fonction récupère le nombre de "agree" by review
    * @param {int} id
    */
-  const getWhoAgrees = (id) => {
+  const getWhoAgrees = () => {
     apiConnection
-      .get(`/ratingNbr/${id}?isAgree=1`)
+      .get(`/ratingNbr/${idReview}?isAgree=1`)
       .then((agree) => {
         setAgreesNbr(agree.data.isAgree);
       })
@@ -30,9 +30,9 @@ function ButtonIsAgreeTemplate({ idReview, user }) {
    * La fonction récupère le nombre de "disagree" by review
    * @param {int} id
    */
-  const getWhoDisAgrees = (id) => {
+  const getWhoDisAgrees = () => {
     apiConnection
-      .get(`/ratingNbr/${id}?isAgree=0`)
+      .get(`/ratingNbr/${idReview}?isAgree=0`)
       .then((disagree) => {
         setDisagreesNbr(disagree.data.isAgree);
       })
@@ -118,9 +118,9 @@ function ButtonIsAgreeTemplate({ idReview, user }) {
    * La fonction check si le user à poster un "agree" sur UNE review
    * @param {int} id
    */
-  const checkIfAgree = (id) => {
+  const checkIfAgree = () => {
     apiConnection
-      .get(`/rating/${id}?isAgree=1`)
+      .get(`/rating/${idReview}?isAgree=1`)
       .then((rate) => {
         if (rate.data && rate.data.id_review === idReview) {
           setIsAgree(true);
@@ -134,9 +134,9 @@ function ButtonIsAgreeTemplate({ idReview, user }) {
    * La fonction check si le user à poster un "disagree" sur UNE review
    * @param {int} id
    */
-  const checkIfDisagree = (id) => {
+  const checkIfDisagree = () => {
     apiConnection
-      .get(`/rating/${id}?isAgree=0`)
+      .get(`/rating/${idReview}?isAgree=0`)
       .then((rate) => {
         if (rate.data && rate.data.id_review === idReview) {
           setIsDisagree(true);
@@ -148,13 +148,13 @@ function ButtonIsAgreeTemplate({ idReview, user }) {
   };
 
   useEffect(() => {
-    getWhoAgrees(idReview);
-    getWhoDisAgrees(idReview);
+    getWhoAgrees();
+    getWhoDisAgrees();
   }, [agreesNbr]);
 
   useEffect(() => {
-    checkIfAgree(idReview);
-    checkIfDisagree(idReview);
+    checkIfAgree();
+    checkIfDisagree();
   }, []);
 
   return (
