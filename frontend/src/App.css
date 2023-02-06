@@ -9,25 +9,32 @@
   }
   /* style des boutons */
   .buttonStyle {
-    @apply bg-primary text-white text-base rounded-md p-2 hover:bg-secondary hover:text-primary;
+    @apply bg-primary font-semibold text-white text-base rounded-md px-4 py-2 shadow-sm shadow-[#282828]/30 hover:bg-secondary hover:text-primary;
   }
   /* style div mère d'un page */
   .pageContainer {
     @apply w-full flex flex-col gap-5 items-center mt-20;
   }
   .iconColor {
-    @apply text-red-300;
+    @apply text-[#6A8D92];
   }
   .iconInCountainer {
     @apply text-4xl iconColor;
   }
   .countainerCriteria {
-    @apply flex flex-col items-center justify-center gap-3 bg-gray-200 w-40 h-40 rounded-lg;
+    @apply flex flex-col items-center justify-center gap-3 border shadow-md shadow-[#4B4E6D]/50 w-40 h-40 rounded-lg;
+  }
+  .countainerReview {
+    @apply flex flex-col gap-3 p-3 rounded-lg border shadow-md shadow-[#4B4E6D]/50
+  }
+  .countainerReview p {
+    
   }
 }
 
 body {
   margin: 0;
+  color: #282828;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -35,10 +42,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1, h2, h3 {
+  font-weight: 500;
+}
+
 input[type="range"] {
   -webkit-appearance: none; /* retire l'apparence originale */
   height: 10px;
-  background: grey;
+  background: #ced0dd;
   border-radius: 5px;
   background-repeat: no-repeat;
 }
@@ -48,7 +59,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 30px;
   width: 20px;
   border-radius: 10px;
-  background: #d46a6a; /* couleur curseur */
+  background: #6A8D92; /* couleur curseur */
   cursor: pointer;
   box-shadow: 0 0 2px 0 #555; /* ombre portée du curseur */
 }

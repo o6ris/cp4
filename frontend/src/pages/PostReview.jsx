@@ -122,8 +122,11 @@ function PostReview() {
             />
             <div className="bg-black opacity-40 w-full h-72 absolute" />
             <div className="absolute flex flex-col h-72 justify-center items-center drop-shadow-lg gap-3">
-              <div className="bg-white opacity-80 p-5 rounded-md">
-                <h2 className="text-xl">{avgScoresCity.avgTotalScore}</h2>
+              <div className="bg-white opacity-80 p-6 rounded-md">
+                <h2 className="text-2xl font-bold">
+                  {avgScoresCity.avgTotalScore}
+                  <span className="text-xs font-normal">/10</span>
+                </h2>
               </div>
               <h1 className="text-2xl text-white text-center text-shadow">
                 {city.name} awaits your review!
@@ -134,7 +137,7 @@ function PostReview() {
             <form className="flex flex-col items-center justify-center w-full gap-5 py-6">
               {/* DATES */}
               <div className="flex flex-col items-center gap-1 w-full">
-                <p className="w-11/12 ml-5">Arrival Date</p>
+                <h3 className="w-11/12 ml-5">Arrival Date</h3>
                 <InputTemplate
                   customWidth="inputStyle"
                   inputType="date"
@@ -143,7 +146,7 @@ function PostReview() {
                 />
               </div>
               <div className="flex flex-col items-center gap-1 w-full">
-                <p className="w-11/12 ml-5">Departure Date</p>
+                <h3 className="w-11/12 ml-5">Departure Date</h3>
                 <InputTemplate
                   customWidth="inputStyle"
                   inputType="date"

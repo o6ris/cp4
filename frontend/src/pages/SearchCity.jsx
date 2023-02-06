@@ -27,7 +27,7 @@ function SearchCity() {
   }, []);
   return (
     <div className="pageContainer">
-      <p>Hello {user.alias}!</p>
+      <h2 className="text-xl">Hello {user.alias}!</h2>
       <SearchBar
         data={cities}
         customWidth="inputStyle"
