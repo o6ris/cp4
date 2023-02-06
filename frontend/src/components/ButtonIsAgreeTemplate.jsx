@@ -89,7 +89,7 @@ function ButtonIsAgreeTemplate({ idReview, user }) {
         })
         .then(() => {
           setIsDisagree(true);
-          getWhoAgrees();
+          getWhoDisAgrees();
         })
         .catch((error) => console.error(error));
     } else if (isAgree && !isDisagree) {
@@ -100,7 +100,7 @@ function ButtonIsAgreeTemplate({ idReview, user }) {
         .then(() => {
           setIsAgree(false);
           setIsDisagree(true);
-          getWhoAgrees();
+          getWhoDisAgrees();
         })
         .catch((error) => console.error(error));
     } else {
@@ -155,7 +155,7 @@ function ButtonIsAgreeTemplate({ idReview, user }) {
   useEffect(() => {
     checkIfAgree();
     checkIfDisagree();
-  }, []);
+  }, [agreesNbr]);
 
   return (
     <div className="flex items-center gap-7">
