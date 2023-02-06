@@ -73,7 +73,7 @@ function SearchBar({
       </label>
       {(displayData || searchData.length > 0) && (
         <div
-          className={`${customWidth} bg-primary rounded-md absolute z-10 top-12 mt-1`}
+          className={`${customWidth} bg-secondary rounded-md absolute z-10 top-12 overflow-y-auto h-96`}
         >
           <ul className="flex flex-col">
             {data
@@ -85,7 +85,7 @@ function SearchBar({
                   onClick={() => updateSearchBar(myData)}
                   type="button"
                   key={myData.id}
-                  className="text-white text-base self-start py-3 pl-5 hover:text-secondary hover:bg-white hover:bg-opacity-5 w-full flex"
+                  className="text-white text-base self-start py-3 pl-5 hover:text-primary hover:font-semibold hover:bg-white hover:bg-opacity-5 w-full flex"
                 >
                   {myData.name}
                 </button>

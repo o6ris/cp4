@@ -162,11 +162,11 @@ function ButtonIsAgreeTemplate({ idReview, user }) {
       <div className="flex items-center gap-2">
         {!isAgree ? (
           <button type="button" onClick={handleAgreed}>
-            <RiHeartLine className="text-xl text-gray-400" />
+            <RiHeartLine className="text-xl text-[#6A8D92]" />
           </button>
         ) : (
           <button type="button" onClick={handleAgreed}>
-            <RiHeartFill className="text-xl text-gray-400" />
+            <RiHeartFill className="text-xl text-[#6A8D92]" />
           </button>
         )}
         <p>{agreesNbr}</p>
@@ -174,11 +174,11 @@ function ButtonIsAgreeTemplate({ idReview, user }) {
       <div className="flex items-center gap-2">
         {!isDisagree ? (
           <button type="button" onClick={handleDisagreed}>
-            <RiDislikeLine className="text-xl text-gray-400" />
+            <RiDislikeLine className="text-xl text-[#6A8D92]" />
           </button>
         ) : (
           <button type="button" onClick={handleDisagreed}>
-            <RiDislikeFill className="text-xl text-gray-400" />
+            <RiDislikeFill className="text-xl text-[#6A8D92]" />
           </button>
         )}
         <p>{disagreesNbr}</p>

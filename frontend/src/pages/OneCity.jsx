@@ -58,15 +58,18 @@ function OneCity() {
           />
           <div className="bg-black opacity-40 w-full h-72 absolute" />
           <div className="absolute flex flex-col h-72 justify-center items-center drop-shadow-lg gap-3">
-            <div className="bg-white opacity-80 p-5 rounded-md">
-              <h2 className="text-xl">{avgScoresCity.avgTotalScore}</h2>
+            <div className="bg-white opacity-80 p-6 rounded-md">
+              <h2 className="text-2xl font-bold">
+                {avgScoresCity.avgTotalScore}
+                <span className="text-xs font-normal">/10</span>
+              </h2>
             </div>
             <h1 className="text-2xl text-white text-center text-shadow">
               Bienvenue à {reviewsCity[0]?.cityName}
             </h1>
             <ButtonTemplate
               buttonType="submit"
-              buttonText="Post your Review!"
+              buttonText="Post a Review!"
               buttonStyle="buttonStyle"
               methodOnClick={() => navigate(`/PostReview/${id}`)}
             />
@@ -120,10 +123,7 @@ function OneCity() {
               <h2 className="text-xl">All the Reviews</h2>
               {reviewsCity.map((review) => {
                 return (
-                  <div
-                    key={review.id}
-                    className="flex flex-col gap-3 bg-gray-200 p-3 rounded-lg"
-                  >
+                  <div key={review.id} className="countainerReview">
                     <div>
                       <h3 className="text-lg">
                         {review.userAlias} gave the score of {review.avgScore}

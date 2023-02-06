@@ -17,9 +17,9 @@ function RangeInputTemplate({
   rangeInput?.addEventListener("input", () => {
     const val = rangeInput.value;
     const percentage = val / 10;
-    const color = `linear-gradient(to right, #d46a6a ${
+    const color = `linear-gradient(to right, #6A8D92 ${
       percentage * 100
-    }%, grey ${percentage * 100}%)`;
+    }%, #ced0dd ${percentage * 100}%)`;
     rangeInput.style.background = color;
   });
 
@@ -30,7 +30,7 @@ function RangeInputTemplate({
         <h3 className="text-xl">{criteria}</h3>
       </div>
       <div className="w-full">
-        <div className="flex relative w-[22rem] rounded-md overflow-hidden bg-gray-300 p-5 gap-4 items-center justify-between">
+        <div className="flex relative w-[22rem] rounded-md overflow-hidden border shadow-md shadow-[#4B4E6D]/20 p-5 gap-4 items-center justify-between">
           <input
             onChange={(e) => methodOnChange(e.target.name, e.target.value)}
             name={name}
@@ -43,7 +43,7 @@ function RangeInputTemplate({
           />
           <p className="text-3xl">{score}</p>
         </div>
-        <p className="text-xs ml-1">{tip}</p>
+        <p className="text-xs ml-1 mt-1">{tip}</p>
       </div>
     </div>
   );
